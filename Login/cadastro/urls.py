@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from cadastro_app import views
 from cadastro_app.views import login_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login_view, name='index'),  # Rota para a raiz do projeto
-    path('login/', login_view, name='login'),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
 ]
+
