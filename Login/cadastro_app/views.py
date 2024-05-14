@@ -6,3 +6,6 @@ def login_view(request):
 
 def register_view(request):
     return render(request, 'Cadastro.html')
+
+def tela_de_graficos(request):
+    return render(request, 'Tela_de_graficos.html')

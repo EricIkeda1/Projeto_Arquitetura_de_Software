@@ -25,5 +25,6 @@ urlpatterns = [
     path('', login_view, name='index'),  # Rota para a raiz do projeto
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
+    path('tela_de_graficos/', views.tela_de_graficos, name='tela_de_graficos'),
 ]
 
