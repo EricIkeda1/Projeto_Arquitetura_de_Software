@@ -116,3 +116,12 @@ body{
 .register-link p a:hover {
     text-decoration: underline;
 }
+
+.error {
+    text-align: center;
+    color: red;
+}
+.success {
+    text-align: center;
+    color: green;
+}
