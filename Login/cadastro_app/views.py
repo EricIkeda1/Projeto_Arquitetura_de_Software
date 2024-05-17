@@ -31,15 +31,18 @@ def register_view(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        if not email:
-            return HttpResponse('O campo email é obrigatório')
+        if not username or not email or not senha:
+            error_message = 'Todos os campos são obrigatórios'
+            return render(request, 'Cadastro.html', {'error_message': error_message})
 
         user_exists = User.objects.filter(email=email).exists()
         if user_exists:
-            return HttpResponse('Já existe um usuário com este email')
+            error_message = 'Já existe um usuário com este email'
+            return render(request, 'Cadastro.html', {'error_message': error_message})
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-        return HttpResponse('Usuário cadastrado com sucesso')
+        success_message = 'Usuário cadastrado com sucesso'
+        return render(request, 'Cadastro.html', {'success_message': success_message})
     else:
         return render(request, 'Cadastro.html')
