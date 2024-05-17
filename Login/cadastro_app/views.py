@@ -26,19 +26,20 @@ def tela_de_graficos(request):
     return HttpResponse('graficos')
 
 def register_view(request):
-    if request.method == "GET":
-        return render(request, 'Cadastro.html')
-    else:
+    if request.method == "POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        user_exists = User.objects.filter(email=email).exists()
+        if not email:
+            return HttpResponse('O campo email é obrigatório')
 
+        user_exists = User.objects.filter(email=email).exists()
         if user_exists:
             return HttpResponse('Já existe um usuário com este email')
-        
+
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-            
         return HttpResponse('Usuário cadastrado com sucesso')
+    else:
+        return render(request, 'Cadastro.html')
