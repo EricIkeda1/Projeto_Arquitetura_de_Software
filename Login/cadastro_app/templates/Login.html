@@ -12,8 +12,8 @@
 </head>
 <body>
     <div class="wrapper">
-
-        <form id="loginForm" action="{% url 'login' %}" method="POST">{% csrf_token %}
+        <form id="loginForm" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
             <h1>Login</h1>
             <div class="input-box">
                 <input type="email" placeholder="Email" name="email">
@@ -23,11 +23,10 @@
                 <input type="password" placeholder="Senha" name="senha">
                 <i class='bx bxs-lock-alt'></i>
             </div>
-            <button input type="submit" class="btn">Logar</button>
+            <button type="submit" class="btn">Logar</button>
             <div class="register-link">
                 <p>Não tem uma conta? <a href="{% url 'register' %}">Register</a></p>
-            </div>      
-
+            </div>
         </form>
     </div>
 </body>

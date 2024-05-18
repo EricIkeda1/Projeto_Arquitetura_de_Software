@@ -3,7 +3,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+from django.views.decorators.csrf import csrf_protect
+
+# View de login
+@csrf_protect
 def login_view(request):
     if request.method == "GET":
         return render(request, 'login.html')
@@ -21,9 +24,13 @@ def login_view(request):
         
         return HttpResponse('Email ou senha inválidos')
 
+# View de gráficos
+@login_required
 def graficos(request):
-    return HttpResponse(request, 'graficos')
+    return render(request, 'graficos.html')
 
+# View de registro
+@csrf_protect
 def register_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -45,9 +52,8 @@ def register_view(request):
         return render(request, 'Cadastro.html', {'success_message': success_message})
     else:
         return render(request, 'Cadastro.html')
-    
+
+# View de início
 @login_required    
 def inicio(request):
     return render(request, 'inicio.html')
-
-        

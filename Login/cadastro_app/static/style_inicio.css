@@ -1,0 +1,18 @@
+/* inicio_style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0f7fa; /* Exemplo de cor de fundo específica para a página inicial */
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    color: #00796b;
+}
+
+/* Outros estilos específicos para a página inicial */
