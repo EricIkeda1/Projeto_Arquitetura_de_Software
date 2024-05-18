@@ -17,13 +17,12 @@ def login_view(request):
             user_auth = authenticate(request, username=user.username, password=senha)
             if user_auth is not None:
                 login(request, user_auth)
-                return redirect('tela_de_graficos')
+                return redirect('inicio')
         
         return HttpResponse('Email ou senha inválidos')
 
-@login_required
-def tela_de_graficos(request):
-    return HttpResponse('graficos')
+def graficos(request):
+    return HttpResponse(request, 'graficos')
 
 def register_view(request):
     if request.method == "POST":
@@ -46,3 +45,8 @@ def register_view(request):
         return render(request, 'Cadastro.html', {'success_message': success_message})
     else:
         return render(request, 'Cadastro.html')
+    
+@login_required    
+def inicio(request):
+    return HttpResponse(request, 'inicio')
+        
