@@ -48,5 +48,6 @@ def register_view(request):
     
 @login_required    
 def inicio(request):
-    return HttpResponse(request, 'inicio')
+    return render(request, 'inicio.html')
+
         
