@@ -1,3 +1,17 @@
 from django.db import models
 
 # Create your models here.
+class Produto(models.Model):
+    nome = models.CharField(max_length=255)
+    descricao = models.TextField()
+    preco_custo = models.DecimalField(max_digits=10, decimal_places=2)
+    preco_venda = models.DecimalField(max_digits=10, decimal_places=2)
+    peso = models.DecimalField(max_digits=5, decimal_places=2)
+    quantidade_comprado = models.IntegerField()
+    quantidade_vendido = models.IntegerField()
+    fabricante = models.CharField(max_length=255)
+    grupo = models.CharField(max_length=255)
+    subgrupo = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nome

@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Produtos</title>
+</head>
+<body>
+    <h1>Lista de Produtos</h1>
+    <ul>
+        {% for produto in produtos %}
+            <li>{{ produto.nome }} - {{ produto.preco_venda }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'adicionar_produto' %}">Adicionar Produto</a>
+</body>
+</html>

@@ -27,5 +27,8 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('graficos/', views.graficos, name='graficos'),
     path('inicio/', views.inicio, name='inicio'),
+    path('adicionar/', views.adicionar_produto, name='adicionar_produto'),
+    path('listar/', views.listar_produtos, name='listar_produtos'),
+    path('acesso-negado/', views.acesso_negado, name='acesso_negado'),
 ]
 

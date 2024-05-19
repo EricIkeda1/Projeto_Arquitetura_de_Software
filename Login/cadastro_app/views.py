@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import user_passes_test, login_required
+from .forms import ProdutoForm
+from .models import Produto
+
 
 # View de login
 @csrf_protect
@@ -57,3 +61,26 @@ def register_view(request):
 @login_required    
 def inicio(request):
     return render(request, 'inicio.html')
+
+#Cadastro de produtos
+def is_admin(user):
+    return user.is_staff
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url='acesso_negado')
+def adicionar_produto(request):
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_produtos')
+    else:
+        form = ProdutoForm()
+    return render(request, 'adicionar_produto.html', {'form': form})
+
+def listar_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'listar_produtos.html', {'produtos': produtos})
+
+def acesso_negado(request):
+    return render(request, 'acesso_negado.html')
