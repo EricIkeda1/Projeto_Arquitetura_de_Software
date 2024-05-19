@@ -1,10 +1,8 @@
-/* inicio_style.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0f7fa; /* Exemplo de cor de fundo específica para a página inicial */
+    background-color: #e0f7fa; 
 }
 
 .container {
@@ -14,10 +12,6 @@ body {
 h1 {
     color: #00796b;
 }
-
-/* Outros estilos específicos para a página inicial */
-
-/* Adicione suas regras de estilo aqui */
 
 .navbar {
     background-color: #f8f9fa; /* Cor de fundo */
@@ -40,7 +34,21 @@ h1 {
     align-items: center;
     height: 90vh;
     background-image: url('Produtos Naturais.png');
-    background-size: 47% auto; /* Diminui a altura em 20% */
-    background-position: center top; /* Mantém a imagem centralizada verticalmente */
+    background-size: 47% auto;
+    background-position: center top; 
     background-repeat: no-repeat;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 9px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center; 
+    display: inline-block; 
 }

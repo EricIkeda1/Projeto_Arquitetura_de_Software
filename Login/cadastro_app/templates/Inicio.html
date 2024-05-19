@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'style_inicio.css' %}">
-    <style>
-        /* Coloque o CSS aqui */
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,13 +28,16 @@
                         <a class="nav-link">Adminstrador</a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link">Logout</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="center-image"></div>
+    <footer>
+        <p>© 2024 Eric Y Ikeda. Todos os direitos reservados.</p>
+    </footer>
 
     {%block bloco_principal%}
       
