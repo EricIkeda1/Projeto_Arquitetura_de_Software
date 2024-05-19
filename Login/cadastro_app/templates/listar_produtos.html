@@ -6,6 +6,9 @@
     {% csrf_token %}
 </head>
 <body>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+    </li>
     <h1>Lista de Produtos</h1>
     <ul>
         {% for produto in produtos %}
