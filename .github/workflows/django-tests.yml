@@ -48,7 +48,7 @@ jobs:
       - name: Apply migrations
         run: |
           python manage.py migrate
-        working-directory: Login
+        working-directory: Login/cadastro_app
 
       - name: Run tests
         run: |
