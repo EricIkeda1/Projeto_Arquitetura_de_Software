@@ -42,12 +42,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Projeto_Arquitetura_de_Software/Projeto_Arquitetura_de_Software/requirements.txt
+          pip install -r Projeto_Arquitetura_de_Software/Login/cadastro_app/requirements.txt
 
       - name: Apply migrations
         run: |
-          python Projeto_Arquitetura_de_Software/Projeto_Arquitetura_de_Software/Login/manage.py migrate
+          python Projeto_Arquitetura_de_Software/Login/manage.py migrate
 
       - name: Run tests
         run: |
-          python Projeto_Arquitetura_de_Software/Projeto_Arquitetura_de_Software/Login/manage.py test
+          python Projeto_Arquitetura_de_Software/Login/manage.py test
