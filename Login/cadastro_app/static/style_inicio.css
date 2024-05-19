@@ -16,3 +16,31 @@ h1 {
 }
 
 /* Outros estilos específicos para a página inicial */
+
+/* Adicione suas regras de estilo aqui */
+
+.navbar {
+    background-color: #f8f9fa; /* Cor de fundo */
+    border-bottom: 1px solid #e9ecef; /* Borda inferior */
+}
+
+.navbar-brand {
+    color: #333; /* Cor do texto */
+    font-weight: bold; /* Negrito */
+}
+
+.navbar-nav .nav-link {
+    color: #333; /* Cor do texto */
+}
+
+/*Imagem do fundo*/
+.center-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-image: url('Produtos Naturais.png');
+    background-size: 47% auto; /* Diminui a altura em 20% */
+    background-position: center top; /* Mantém a imagem centralizada verticalmente */
+    background-repeat: no-repeat;
+}
