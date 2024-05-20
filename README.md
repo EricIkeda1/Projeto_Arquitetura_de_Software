@@ -15,7 +15,7 @@ Casos de Uso:
 
 • UC04 - Cadastro de Grupo e UC05 - Subgrupo: Os produtos naturais podem ser agrupados em categorias e subcategorias para facilitar a navegação. O administrador pode criar novos grupos e subgrupos, por exemplo, "Alimentos Orgânicos" pode ser um grupo, com "Frutas", "Verduras" e "Grãos" como subgrupos. Estrutura de dados: nome e descrição
 
-• UC06 - Lançamento de Vendas: O funcionário pode adicionar itens que foram escolhidos para compra. O sistema calcula valor de venda e quantidade do produto. Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o estoque.
+- UC06 - Lançamento de Vendas: O funcionário pode adicionar itens que foram escolhidos para compra. O sistema calcula valor de venda e quantidade do produto. Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o estoque.
 
 Estrutura de dados: Produto, Fabricante, Grupo, SubGrupo, preço venda, quantidade, data e hora venda
 
