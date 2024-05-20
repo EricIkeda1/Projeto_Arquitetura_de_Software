@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Grupos</title>
+</head>
+<body>
+    <h1>Grupos</h1>
+    {% csrf_token %}
+    <ul>
+        {% for grupo in grupos %}
+            <li>{{ grupo.nome }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

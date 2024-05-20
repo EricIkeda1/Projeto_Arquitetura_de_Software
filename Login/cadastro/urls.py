@@ -30,5 +30,10 @@ urlpatterns = [
     path('adicionar/', views.adicionar_produto, name='adicionar_produto'),
     path('listar/', views.listar_produtos, name='listar_produtos'),
     path('acesso-negado/', views.acesso_negado, name='acesso_negado'),
+    path('fabricante/', views.cadastrar_fabricante, name='cadastro_fabricante'),
+    path('fabricante/pagina-sucesso/', views.pagina_sucesso, name='pagina_sucesso'),
+    path('listar_grupos/', views.listar_grupos, name='listar_grupos'),
+    path('adicionar_grupos/', views.adicionar_grupo, name='adicionar_grupo'),
+    path('subgrupos/', views.adicionar_subgrupo, name='adicionar_subgrupo'),
 ]
 

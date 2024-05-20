@@ -7,7 +7,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import user_passes_test, login_required
 from .forms import ProdutoForm
 from .models import Produto
-
+from .forms import FabricanteForm
+from django.contrib.admin.views.decorators import staff_member_required
+from .models import Grupo, Subgrupo
+from .forms import GrupoForm, SubgrupoForm
 
 # View de login
 @csrf_protect
@@ -84,3 +87,42 @@ def listar_produtos(request):
 
 def acesso_negado(request):
     return render(request, 'acesso_negado.html')
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url='acesso_negado')
+def cadastrar_fabricante(request):
+    if request.method == 'POST':
+        form = FabricanteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('pagina_sucesso')
+    else:
+        form = FabricanteForm()
+    return render(request, 'cadastro_fabricante.html', {'form': form})
+
+def pagina_sucesso(request):
+    return render(request, 'pagina_sucesso.html')
+
+def listar_grupos(request):
+    grupos = Grupo.objects.all()
+    return render(request, 'listar_grupos.html', {'grupos': grupos})
+
+def adicionar_grupo(request):
+    if request.method == 'POST':
+        form = GrupoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_grupos')
+    else:
+        form = GrupoForm()
+    return render(request, 'adicionar_grupo.html', {'form': form})
+
+def adicionar_subgrupo(request):
+    if request.method == 'POST':
+        form = SubgrupoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_grupos')
+    else:
+        form = SubgrupoForm()
+    return render(request, 'adicionar_subgrupo.html', {'form': form})
