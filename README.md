@@ -1,37 +1,94 @@
 # Projeto_Arquitetura_de_Software
 Caso de Uso: Sistema de Vendas de Produtos Naturais
 
+Caso de Uso: Sistema de Vendas de Produtos Naturais
 • Ator Principal: Funcionário (acesso apenas no lançamento de vendas)
 
 • Ator Secundário: Administrador do Sistema (acesso total)
 
 Casos de Uso:
 
-• UC01 - Autenticação: O funcionário acessa o sistema e é solicitado a autenticar-se inserindo seu nome de usuário e senha. Se as credenciais estiverem corretas, o cliente é autenticado e pode acessar as funcionalidades do sistema. Estrutura de dados: login, nome, email.
+• UC01 - Autenticação:
 
-• UC02 - Cadastro de Produto: O administrador do sistema pode adicionar novos produtos ao catálogo. Após o cadastro, os produtos são exibidos no site para os clientes. Estrutura de dados: nome, descrição, preço custo, preço vendas, peso, quantidade comprado, quantidade vendida, Fabricante, Grupo e Subgrupo
+o O funcionário acessa o sistema e é solicitado a autenticar-se inserindo seu nome
+de usuário e senha.
 
-• UC03 - Cadastro do Fabricante: O administrador pode cadastrar informações sobre os fabricantes dos produtos naturais. Esses dados são associados aos produtos para fornecer informações adicionais aos clientes. Estrutura de dados: nome fantasia, razão social, cnpj, endereço, telefone, email, vendedor
+o Se as credenciais estiverem corretas, o cliente é autenticado e pode acessar as
+funcionalidades do sistema.
 
-• UC04 - Cadastro de Grupo e UC05 - Subgrupo: Os produtos naturais podem ser agrupados em categorias e subcategorias para facilitar a navegação. O administrador pode criar novos grupos e subgrupos, por exemplo, "Alimentos Orgânicos" pode ser um grupo, com "Frutas", "Verduras" e "Grãos" como subgrupos. Estrutura de dados: nome e descrição
+o Estrutura de dados: login, nome, email.
 
-- UC06 - Lançamento de Vendas: O funcionário pode adicionar itens que foram escolhidos para compra. O sistema calcula valor de venda e quantidade do produto. Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o estoque.
+• UC02 - Cadastro de Produto:
 
-Estrutura de dados: Produto, Fabricante, Grupo, SubGrupo, preço venda, quantidade, data e hora venda
+o O administrador do sistema pode adicionar novos produtos ao catálogo.
 
-• UC07 - Visualizar Vendas: O funcionário pode visualizar através de gráficos a situação atual do comércio. Visualiza na mesma tela 3 gráficos com as seguintes temáticas
+o Após o cadastro, os produtos são exibidos no site para os clientes.
 
-▪ Gráfico de Linha: apresentar o valor do custo Total e o valor venda Total mensal do ano corrente. (Vendas)
+o Estrutura de dados: nome, descrição, preço custo, preço vendas, peso,
 
-▪ Gráfico de Barras: apresentar o valor da quantidade comprado total e a quantidade vendida total mensal do ano corrente. (Produto)
+quantidade comprado, quantidade vendida, Fabricante, Grupo e Subgrupo
 
-▪ Gráfico de Dispersão: apresentar o percentual de lucro dos produtos vendidos mensal do ano corrente. (Produto)
+• UC03 - Cadastro do Fabricante:
 
-▪ Gráfico de Pizza: apresentar os 3 produtos mais vendidos em quantidade mensal do ano corrente. (Vendas)
+o O administrador pode cadastrar informações sobre os fabricantes dos produtos
+naturais.
 
-▪ Gráfico de Barras e Linha: apresentar os 4 grupos de produtos mais vendidos mensal do ano corrente com a meta de quantidade >= 1000 unidades. (Vendas)
+o Esses dados são associados aos produtos para fornecer informações adicionais
+aos clientes.
 
-▪ Tabela Analítica: listar os produtos que estão com estoque baixo e ordem decrescente.
+o Estrutura de dados: nome fantasia, razão social, cnpj, endereço, telefone, email,
+vendedor
+
+• UC04 - Cadastro de Grupo e UC05 - Subgrupo:
+
+o Os produtos naturais podem ser agrupados em categorias e subcategorias para
+facilitar a navegação.
+
+o O administrador pode criar novos grupos e subgrupos, por exemplo, "Alimentos
+Orgânicos" pode ser um grupo, com "Frutas", "Verduras" e "Grãos" como
+subgrupos.
+
+o Estrutura de dados: nome e descrição
+
+• UC06 - Lançamento de Vendas:
+
+o O funcionário pode adicionar itens que foram escolhidos para compra.
+
+o O sistema calcula valor de venda e quantidade do produto.
+
+o Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o
+estoque.
+
+2
+o Estrutura de dados: Produto, Fabricante, Grupo, SubGrupo, preço venda,
+quantidade, data e hora venda
+
+• UC07 - Visualizar Vendas:
+
+o O funcionário pode visualizar através de gráficos a situação atual do comércio.
+
+o Visualiza na mesma tela 3x3 gráficos* com as seguintes temáticas
+
+▪ Gráfico de Linha: apresentar o valor do custo Total e o valor venda Total
+mensal do ano corrente. (Vendas)
+
+▪ Gráfico de Barras: apresentar o valor da quantidade comprado total e a
+quantidade vendida total mensal do ano corrente. (Produto)
+
+▪ Gráfico de Dispersão: apresentar o percentual de lucro dos produtos
+vendidos mensal do ano corrente. (Produto)
+
+▪ Gráfico de Pizza: apresentar os 3 produtos mais vendidos em
+quantidade mensal do ano corrente. (Vendas)
+
+▪ Gráfico de Barras e Linha: apresentar os 4 grupos de produtos mais
+vendidos mensal do ano corrente com a meta de quantidade >= 1000
+unidades. (Vendas)
+
+▪ Tabela Analítica: listar os produtos que estão com estoque baixo e
+ordem decrescente.
+
+*Use as libs plotly.express e plotly.graph_objs
 
 ![Captura de tela 2024-05-11 215736](https://github.com/EricIkeda1/Projeto_Arquitetura_de_Software/assets/93358246/0fcb5de5-0f92-42e4-90ea-6181ddb70123)
 
