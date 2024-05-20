@@ -2,6 +2,7 @@
 Caso de Uso: Sistema de Vendas de Produtos Naturais
 
 Caso de Uso: Sistema de Vendas de Produtos Naturais
+
 • Ator Principal: Funcionário (acesso apenas no lançamento de vendas)
 
 • Ator Secundário: Administrador do Sistema (acesso total)
