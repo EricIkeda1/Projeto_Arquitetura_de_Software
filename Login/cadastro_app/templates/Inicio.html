@@ -12,28 +12,24 @@
 </head>
 <body>
     <nav>
-
         <div class="logo">
-            <a href="Inicio.html">Logo</a>
+            <a href="">Logo</a>
         </div>
-
         <ul>
-            <li> <a href="#"> Home </a> </li>
-            <li> <a href="#"> Sobre </a> </li>
-            <li> <a href="#"> Preço </a> </li>
-            <li> <a href="#"> Serviços </a> </li>
-            <li> <a href="#"> Contato </a> </li>
+            <li><a href="">Home</a></li>
+            <li><a href="{% url 'listar_produtos' %}">Catálogos</a></li>
+            <li><a href="{% url 'cadastro_fabricante' %}">Fabricante</a></li>
+            <li><a href="{% url 'graficos' %}">Gráficos</a></li>
+            <li><a href="{% url 'listar_grupos' %}">Grupos</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
         </ul>
-
     </nav>
-    <selection class="banner">
+    <section class="banner">
         <div class="texto">
-            <h1 class="titulo">Criar um site inicrivel</h1>
-            <h2 class="sub_titulo">Usando HTML & CSS puro</h2>
-            <div class="botoes">
-            <button>Saiba mais</button>
-            <button>inscrever-se</button>
         </div>
-    </selection>
+    </section>
+    <footer>
+        <p>© 2024 Eric Y Ikeda. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
