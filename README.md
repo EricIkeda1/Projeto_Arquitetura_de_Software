@@ -11,64 +11,64 @@ Casos de Uso:
 
 • UC01 - Autenticação:
 
-o O funcionário acessa o sistema e é solicitado a autenticar-se inserindo seu nome
+O funcionário acessa o sistema e é solicitado a autenticar-se inserindo seu nome
 de usuário e senha.
 
-o Se as credenciais estiverem corretas, o cliente é autenticado e pode acessar as
+Se as credenciais estiverem corretas, o cliente é autenticado e pode acessar as
 funcionalidades do sistema.
 
-o Estrutura de dados: login, nome, email.
+ Estrutura de dados: login, nome, email.
 
 • UC02 - Cadastro de Produto:
 
-o O administrador do sistema pode adicionar novos produtos ao catálogo.
+O administrador do sistema pode adicionar novos produtos ao catálogo.
 
-o Após o cadastro, os produtos são exibidos no site para os clientes.
+Após o cadastro, os produtos são exibidos no site para os clientes.
 
-o Estrutura de dados: nome, descrição, preço custo, preço vendas, peso,
+Estrutura de dados: nome, descrição, preço custo, preço vendas, peso,
 
 quantidade comprado, quantidade vendida, Fabricante, Grupo e Subgrupo
 
 • UC03 - Cadastro do Fabricante:
 
-o O administrador pode cadastrar informações sobre os fabricantes dos produtos
+O administrador pode cadastrar informações sobre os fabricantes dos produtos
 naturais.
 
-o Esses dados são associados aos produtos para fornecer informações adicionais
+Esses dados são associados aos produtos para fornecer informações adicionais
 aos clientes.
 
-o Estrutura de dados: nome fantasia, razão social, cnpj, endereço, telefone, email,
+Estrutura de dados: nome fantasia, razão social, cnpj, endereço, telefone, email,
 vendedor
 
 • UC04 - Cadastro de Grupo e UC05 - Subgrupo:
 
-o Os produtos naturais podem ser agrupados em categorias e subcategorias para
+Os produtos naturais podem ser agrupados em categorias e subcategorias para
 facilitar a navegação.
 
-o O administrador pode criar novos grupos e subgrupos, por exemplo, "Alimentos
+O administrador pode criar novos grupos e subgrupos, por exemplo, "Alimentos
 Orgânicos" pode ser um grupo, com "Frutas", "Verduras" e "Grãos" como
 subgrupos.
 
-o Estrutura de dados: nome e descrição
+Estrutura de dados: nome e descrição
 
 • UC06 - Lançamento de Vendas:
 
-o O funcionário pode adicionar itens que foram escolhidos para compra.
+O funcionário pode adicionar itens que foram escolhidos para compra.
 
-o O sistema calcula valor de venda e quantidade do produto.
+O sistema calcula valor de venda e quantidade do produto.
 
-o Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o
+Ao finalizar todos os itens escolhidos, o sistema registra a venda, atualiza o
 estoque.
 
 2
-o Estrutura de dados: Produto, Fabricante, Grupo, SubGrupo, preço venda,
+Estrutura de dados: Produto, Fabricante, Grupo, SubGrupo, preço venda,
 quantidade, data e hora venda
 
 • UC07 - Visualizar Vendas:
 
-o O funcionário pode visualizar através de gráficos a situação atual do comércio.
+O funcionário pode visualizar através de gráficos a situação atual do comércio.
 
-o Visualiza na mesma tela 3x3 gráficos* com as seguintes temáticas
+Visualiza na mesma tela 3x3 gráficos* com as seguintes temáticas
 
 ▪ Gráfico de Linha: apresentar o valor do custo Total e o valor venda Total
 mensal do ano corrente. (Vendas)
@@ -108,6 +108,6 @@ Design Patterns:
 
 • Padrões de criação:
 
-o Factory Method: Fornece uma interface para criação de famílias de objetos relacionados ou dependentes sem especificar suas classes concretas. o Singleton: Garante que uma classe tenha somente uma instância e fornece um ponto global de acesso para ela.
+Factory Method: Fornece uma interface para criação de famílias de objetos relacionados ou dependentes sem especificar suas classes concretas. o Singleton: Garante que uma classe tenha somente uma instância e fornece um ponto global de acesso para ela.
 
 • Padrões comportamentais: o Observer: Define uma dependência um-para-muitos entre objetos, de modo que, quando um objeto muda de estado, todos os seus dependentes são automaticamente notificados e atualizados
