@@ -143,4 +143,9 @@ def remover_produto(request, produto_id):
     else:
         return HttpResponseForbidden("Acesso negado")
 
-
+def remover_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    if request.method == "POST":
+        produto.delete()
+        return redirect('listar_produtos')  # Ajuste conforme necessário
+    return redirect('listar_produtos')  # Ajuste conforme necessário

@@ -28,10 +28,10 @@
                         <h3>{{ produto.nome }}</h3>
                         <p class="preco">Preço: R$ {{ produto.preco_venda }}</p>
                         {% if user.is_staff %}
-                            <form action="{% url 'remover_produto' produto.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn-remover">Remover</button>
-                            </form>
+                        <form action="{% url 'remover_produto' produto.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-remover">Remover</button>
+                        </form>
                         {% endif %}
                     </li>
                 {% endfor %}

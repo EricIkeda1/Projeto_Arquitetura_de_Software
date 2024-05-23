@@ -35,5 +35,6 @@ urlpatterns = [
     path('listar_grupos/', views.listar_grupos, name='listar_grupos'),
     path('adicionar_grupos/', views.adicionar_grupo, name='adicionar_grupo'),
     path('subgrupos/', views.adicionar_subgrupo, name='adicionar_subgrupo'),
+    path('remover/<int:id>/', views.remover_produto, name='remover_produto'),
 ]
 
