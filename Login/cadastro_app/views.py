@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -11,6 +11,7 @@ from .forms import FabricanteForm
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Grupo, Subgrupo
 from .forms import GrupoForm, SubgrupoForm
+from django.http import HttpResponseForbidden
 
 # View de login
 @csrf_protect
@@ -126,3 +127,20 @@ def adicionar_subgrupo(request):
     else:
         form = SubgrupoForm()
     return render(request, 'adicionar_subgrupo.html', {'form': form})
+
+def listar_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'listar_produtos.html', {'produtos': produtos})
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url='acesso_negado')
+def remover_produto(request, produto_id):
+    produto = get_object_or_404(Produto, pk=produto_id)
+    
+    if request.method == 'POST':
+        produto.delete()
+        return redirect('listar_produtos')
+    else:
+        return HttpResponseForbidden("Acesso negado")
+
+

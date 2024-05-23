@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+
 
 # Create your models here.
 class Produto(models.Model):
@@ -42,3 +44,13 @@ class Subgrupo(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class Venda(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade = models.IntegerField()
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
+    data_hora_venda = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.produto.nome} - {self.quantidade}"
+    
