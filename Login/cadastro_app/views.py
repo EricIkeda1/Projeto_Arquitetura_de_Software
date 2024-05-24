@@ -12,6 +12,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import Grupo, Subgrupo
 from .forms import GrupoForm, SubgrupoForm
 from django.http import HttpResponseForbidden
+from .models import Produto, Venda, VendaItem
+from django.db import transaction
 
 # View de login
 @csrf_protect
@@ -147,5 +149,29 @@ def remover_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
     if request.method == "POST":
         produto.delete()
-        return redirect('listar_produtos')  # Ajuste conforme necessário
-    return redirect('listar_produtos')  # Ajuste conforme necessário
+        return redirect('listar_produtos') 
+    return redirect('listar_produtos')  
+
+def adicionar_venda(request):
+    if request.method == 'POST':
+        itens = request.POST.getlist('itens')  # Lista de IDs de produtos
+        quantidades = request.POST.getlist('quantidades')  # Lista de quantidades
+        with transaction.atomic():
+            venda = Venda.objects.create()
+            valor_total = 0
+            for item_id, quantidade in zip(itens, quantidades):
+                produto = get_object_or_404(Produto, id=item_id)
+                quantidade = int(quantidade)
+                valor_item = produto.preco_venda * quantidade
+                VendaItem.objects.create(venda=venda, produto=produto, quantidade=quantidade, valor_total=valor_item)
+                valor_total += valor_item
+            venda.valor_total = valor_total
+            venda.save()
+        return redirect('venda_detalhe', venda_id=venda.id)
+    else:
+        produtos = Produto.objects.all()
+        return render(request, 'adicionar_venda.html', {'produtos': produtos})
+
+def venda_detalhe(request, venda_id):
+    venda = get_object_or_404(Venda, id=venda_id)
+    return render(request, 'venda_detalhe.html', {'venda': venda})

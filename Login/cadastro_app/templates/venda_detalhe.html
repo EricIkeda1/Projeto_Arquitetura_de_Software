@@ -1,0 +1,10 @@
+<h2>Detalhes da Venda</h2>
+{% csrf_token %}
+<p>Data/Hora: {{ venda.data_hora_venda }}</p>
+<p>Itens:</p>
+<ul>
+    {% for item in venda.itens.all %}
+        <li>{{ item.produto.nome }} - {{ item.quantidade }} - {{ item.valor_total }}</li>
+    {% endfor %}
+</ul>
+<p>Valor Total: {{ venda.valor_total }}</p>

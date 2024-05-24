@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
-# Create your models here.
 class Produto(models.Model):
     nome = models.CharField(max_length=255)
     descricao = models.TextField()
@@ -10,7 +8,7 @@ class Produto(models.Model):
     preco_venda = models.DecimalField(max_digits=10, decimal_places=2)
     peso = models.DecimalField(max_digits=5, decimal_places=2)
     quantidade_comprado = models.IntegerField()
-    quantidade_vendido = models.IntegerField()
+    quantidade_vendido = models.IntegerField(default=0)
     fabricante = models.CharField(max_length=255)
     grupo = models.CharField(max_length=255)
     subgrupo = models.CharField(max_length=255)
@@ -44,13 +42,25 @@ class Subgrupo(models.Model):
 
     def __str__(self):
         return self.nome
-    
+
 class Venda(models.Model):
+    data_hora_venda = models.DateTimeField(default=timezone.now)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return f"Venda #{self.id} - {self.data_hora_venda}"
+
+class VendaItem(models.Model):
+    venda = models.ForeignKey(Venda, related_name='itens', on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.IntegerField()
     valor_total = models.DecimalField(max_digits=10, decimal_places=2)
-    data_hora_venda = models.DateTimeField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        # Atualiza o estoque ao salvar
+        self.produto.quantidade_vendido += self.quantidade
+        self.produto.save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.produto.nome} - {self.quantidade}"
-    
