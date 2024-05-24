@@ -68,7 +68,7 @@ def register_view(request):
 def inicio(request):
     return render(request, 'inicio.html')
 
-#Cadastro de produtos
+#Cadastro de produto
 def is_admin(user):
     return user.is_staff
 
