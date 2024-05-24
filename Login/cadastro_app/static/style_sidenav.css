@@ -1,15 +1,15 @@
 /* Estilo para o navbar de funcionalidades */
 .sidenav {
     height: 100%;
-    width: 250px; /* Defina a largura inicial como 250px */
-    max-width: 250px;
+    width: 231px; 
+    max-width: 231px;
     position: fixed;
-    z-index: 1;
+    z-index: 2; 
     top: 0;
-    right: -250px; /* Posicione inicialmente fora da tela */
+    right: -231px;
     background-color: #111;
     overflow-x: hidden;
-    transition: right 0.5s; /* Transição suave para a posição direita */
+    transition: right 0.5s; 
     padding-top: 60px;
 }
 
@@ -30,7 +30,7 @@
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 36px;    
     margin-left: 50px;
 }
 
@@ -41,4 +41,23 @@
     color: white;
     padding: 10px 15px;
     border: none;
+}
+
+.page-container {
+    transition: transform 0.5s; 
+}
+
+.page-container.nav-open {
+    transform: translateX(-231px); 
+}
+
+/* Media query para dispositivos móveis */
+@media screen and (max-width: 768px) {
+    nav ul li {
+        display: none;
+    }
+
+    .openbtn {
+        display: block;
+    }
 }
