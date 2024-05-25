@@ -15,7 +15,6 @@
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-        <a href="{% url 'graficos' %}">Gráficos</a>
         <a href="{% url 'listar_grupos' %}">Grupos</a>
         <a href="{% url 'adicionar_subgrupo' %}">Subgrupos</a>
         <a href="{% url 'adicionar_venda' %}">Vendas</a>
@@ -30,6 +29,7 @@
                 <li><a href="">Home</a></li>
                 <li><a href="{% url 'listar_produtos' %}">Catálogos</a></li>
                 <li><a href="{% url 'cadastro_fabricante' %}">Fabricante</a></li>
+                <li><a href="{% url 'graficos' %}">Gráficos</a></li>
                 <li><a href="{% url 'login' %}">Logout</a></li>
                 <li><button class="openbtn" onclick="toggleNav()">☰</button></li>
             </ul>
