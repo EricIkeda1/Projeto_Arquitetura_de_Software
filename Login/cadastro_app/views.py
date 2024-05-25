@@ -14,6 +14,9 @@ from .forms import GrupoForm, SubgrupoForm
 from django.http import HttpResponseForbidden
 from .models import Produto, Venda, VendaItem
 from django.db import transaction
+from django.shortcuts import render
+import plotly.express as px
+import plotly.graph_objs as go
 
 # View de login
 @csrf_protect
@@ -175,3 +178,17 @@ def adicionar_venda(request):
 def venda_detalhe(request, venda_id):
     venda = get_object_or_404(Venda, id=venda_id)
     return render(request, 'venda_detalhe.html', {'venda': venda})
+
+def visualizar_vendas(request):
+    data = {
+        "mês": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        "custo_total": [1000, 1200, 1500, 1300, 1400, 1600, 1700, 1800, 1900, 2000, 2100, 2200],
+        "venda_total": [2000, 2200, 2500, 2300, 2400, 2600, 2700, 2800, 2900, 3000, 3100, 3200]
+    }
+
+    grafico_linha = go.Figure()
+    grafico_linha.add_trace(go.Scatter(x=data["mês"], y=data["custo_total"], mode='lines+markers', name='Custo Total'))
+    grafico_linha.add_trace(go.Scatter(x=data["mês"], y=data["venda_total"], mode='lines+markers', name='Venda Total'))
+    grafico_linha_html = grafico_linha.to_html(full_html=False)
+
+    return render(request, 'Graficos.html', {'grafico_linha': grafico_linha_html})
