@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançar Vendas</title>
+</head>
+<body>
+    <h1>Lançar Vendas</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <button type="submit">Lançar Venda</button>
+    </form>
+</body>
+</html>

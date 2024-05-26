@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_listar_produtos.css' %}">
+    {% csrf_token %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Lista de Produtos</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <section class="produtos">
+            <h2>Nossos Produtos</h2>
+            <ul>
+                {% for produto in produtos %}
+                    <li>
+                        <h3>{{ produto.nome }}</h3>
+                        <p class="preco">Preço: R$ {{ produto.preco_venda }}</p>
+                        {% if user.is_staff %}
+                        <form action="{% url 'remover_produto' produto.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-remover">Remover</button>
+                        </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% if user.is_staff %}
+            <a href="{% url 'adicionar_produto' %}" class="btn">Adicionar Produto</a>
+        {% endif %}
+    </main>
+</body>
+</html>

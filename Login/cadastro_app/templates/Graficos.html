@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráficos de Vendas</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .dashboard > div {
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 100%;
+        }
+        .tabela {
+            width: 90%;
+            margin: 40px auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gráficos de Vendas</h1>
+    
+    <div class="dashboard">
+        <div class="grafico" id="linha">{{ fig_linha|safe }}</div>
+        <div class="grafico" id="barras">{{ fig_barras|safe }}</div>
+        <div class="grafico" id="dispersao">{{ fig_dispersao|safe }}</div>
+        <div class="grafico" id="pizza">{{ fig_pizza|safe }}</div>
+        <div class="grafico" id="barras_linha">{{ fig_barras_linha|safe }}</div>
+        <div class="grafico" id="outro_grafico">{{ fig_outro_grafico|safe }}</div>
+    </div>
+
+    <h2>Produtos com Estoque Baixo</h2>
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Quantidade Comprada</th>
+                <th>Quantidade Vendida</th>
+                <th>Fabricante</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in estoque_baixo %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.descricao }}</td>
+                <td>{{ produto.quantidade_comprado }}</td>
+                <td>{{ produto.quantidade_vendido }}</td>
+                <td>{{ produto.fabricante }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
