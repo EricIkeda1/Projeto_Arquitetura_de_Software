@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gráficos de Vendas</title>
+    {% csrf_token %}
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         .dashboard {
@@ -36,6 +37,9 @@
     </style>
 </head>
 <body>
+    <ul>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    </ul>
     <h1>Gráficos de Vendas</h1>
     
     <div class="dashboard">
