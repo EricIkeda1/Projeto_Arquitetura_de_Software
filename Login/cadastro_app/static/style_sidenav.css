@@ -1,0 +1,52 @@
+/* Estilo para o navbar de funcionalidades */
+.sidenav {
+    height: 100%;
+    width: 231px; 
+    max-width: 231px;
+    position: fixed;
+    z-index: 2; 
+    top: 0;
+    right: -231px;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: right 0.5s; 
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: color 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;    
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.page-container {
+    transition: transform 0.5s; 
+}
+
+.page-container.nav-open {
+    transform: translateX(-231px); 
+}

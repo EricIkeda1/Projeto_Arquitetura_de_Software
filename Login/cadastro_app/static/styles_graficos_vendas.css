@@ -1,0 +1,66 @@
+/* css para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* css para os links de navegação */
+ul {
+    list-style: none;
+}
+
+ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ccc;
+}
+
+ul li a:hover {
+    background-color: #aaa;
+}
+
+/* css para os cabeçalhos */
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+/* css para os gráficos */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.grafico {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* css para a tabela */
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela th, .tabela td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.tabela th {
+    background-color: #f2f2f2;
+}

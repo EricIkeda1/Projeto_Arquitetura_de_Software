@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Fabricante</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles_cadastro_fabricante.css' %}">
+    {% csrf_token %}
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'inicio' %}">Início</a></li>
+        </ul>
+    </nav>
+    <h1>Cadastro de Fabricante</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>

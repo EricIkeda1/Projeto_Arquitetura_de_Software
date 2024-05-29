@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Acesso Negado</title>
+    {% csrf_token %}
+</head>
+<body>
+    <h1>Acesso Negado</h1>
+    <p>Você não tem permissão para acessar esta página.</p>
+    <a href="{% url 'listar_produtos' %}">Voltar à lista de produtos</a>
+</body>
+</html>
