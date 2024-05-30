@@ -17,16 +17,5 @@
                 {% endfor %}
             </ul>
         </div>
-
-        <div class="product-info">
-            <h2>Adicionar Valor</h2>
-            <form method="post">
-                {% csrf_token %}
-                <label for="valor">Valor:</label>
-                <input type="text" id="valor" name="valor" required>
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </div>
 </body>
 </html>
