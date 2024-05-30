@@ -1,8 +1,10 @@
-import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
+from django.shortcuts import render
+from django.db.models import Sum
 from django.utils import timezone
 from .models import Venda, Produto, VendaItem
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
 
 def get_vendas_data():
     return Venda.objects.filter(data_hora_venda__year=timezone.now().year)
@@ -67,3 +69,39 @@ def create_fig_barras_linha(produtos):
 
 def get_estoque_baixo():
     return Produto.objects.filter(quantidade_comprado__lt=50).order_by('-quantidade_comprado')
+
+def create_fig_barras_linha(produtos):
+    # Filtra os produtos vendidos no ano corrente
+    produtos_vendidos_ano_corrente = produtos.filter(vendaitem__venda__data_hora_venda__year=timezone.now().year)
+
+    # Agrupa os produtos pelo grupo e soma a quantidade vendida
+    grupos_quantidade_vendida = produtos_vendidos_ano_corrente.values('grupo').annotate(total_vendido=Sum('quantidade_vendido'))
+
+    # Ordena os grupos pela quantidade vendida em ordem decrescente e pega os 4 primeiros
+    top_grupos = sorted(grupos_quantidade_vendida, key=lambda x: x['total_vendido'], reverse=True)[:4]
+
+    # Verifica se algum grupo atingiu a meta de 1000 unidades vendidas
+    metas = {'grupo': [], 'meta': []}
+    for grupo in top_grupos:
+        if grupo['total_vendido'] >= 1000:
+            metas['grupo'].append(grupo['grupo'])
+            metas['meta'].append(1000)
+        else:
+            metas['grupo'].append(grupo['grupo'])
+            metas['meta'].append(None)
+
+    # Cria o gráfico de barras e linha
+    fig_barras_linha = go.Figure()
+    fig_barras_linha.add_trace(go.Bar(x=[grupo['grupo'] for grupo in top_grupos], 
+                                      y=[grupo['total_vendido'] for grupo in top_grupos], 
+                                      name='Quantidade Vendida'))
+    fig_barras_linha.add_trace(go.Scatter(x=[grupo['grupo'] for grupo in top_grupos], 
+                                          y=metas['meta'],
+                                          mode='lines',
+                                          name='Meta 1000 Unidades'))
+
+    fig_barras_linha.update_layout(title='Grupos de Produtos Mais Vendidos Mensalmente (Ano Corrente)',
+                                   xaxis_title='Grupo de Produto',
+                                   yaxis_title='Quantidade Vendida')
+
+    return fig_barras_linha 

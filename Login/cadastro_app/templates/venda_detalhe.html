@@ -1,10 +1,32 @@
-<h2>Detalhes da Venda</h2>
-{% csrf_token %}
-<p>Data/Hora: {{ venda.data_hora_venda }}</p>
-<p>Itens:</p>
-<ul>
-    {% for item in venda.itens.all %}
-        <li>{{ item.produto.nome }} - {{ item.quantidade }} - {{ item.valor_total }}</li>
-    {% endfor %}
-</ul>
-<p>Valor Total: {{ venda.valor_total }}</p>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes da Venda</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_venda_detalhe.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes da Venda #{{ venda.id }}</h1>
+
+        <div class="product-info">
+            <h2>Itens da Venda</h2>
+            <ul>
+                {% for item in venda_items %}
+                    <li>{{ item.produto.nome }}: {{ item.quantidade }} unidades</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="product-info">
+            <h2>Adicionar Valor</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="valor">Valor:</label>
+                <input type="text" id="valor" name="valor" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -20,31 +20,30 @@
         <div class="grafico" id="dispersao">{{ fig_dispersao|safe }}</div>
         <div class="grafico" id="pizza">{{ fig_pizza|safe }}</div>
         <div class="grafico" id="barras_linha">{{ fig_barras_linha|safe }}</div>
-        <div class="grafico" id="outro_grafico">{{ fig_outro_grafico|safe }}</div>
+        <div class="grafico card" id="estoque_baixo">
+            <h2>Produtos com Estoque Baixo</h2>
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Quantidade Comprada</th>
+                        <th>Quantidade Vendida</th>
+                        <th>Fabricante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in estoque_baixo %}
+                    <tr>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.quantidade_comprado }}</td>
+                        <td>{{ produto.quantidade_vendido }}</td>
+                        <td>{{ produto.fabricante }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <h2>Produtos com Estoque Baixo</h2>
-    <table class="tabela">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Quantidade Comprada</th>
-                <th>Quantidade Vendida</th>
-                <th>Fabricante</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for produto in estoque_baixo %}
-            <tr>
-                <td>{{ produto.nome }}</td>
-                <td>{{ produto.descricao }}</td>
-                <td>{{ produto.quantidade_comprado }}</td>
-                <td>{{ produto.quantidade_vendido }}</td>
-                <td>{{ produto.fabricante }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+    

@@ -17,6 +17,14 @@ from django.db import transaction
 from django.utils import timezone
 from .forms import FeedbackForm
 from .models import Feedback
+from .models import Venda
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+import plotly.graph_objects as go
+import plotly.express as px
+from django.db.models import Sum
+from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_fig_linha, create_fig_barras, create_fig_dispersao, create_fig_pizza, create_fig_barras_linha
+from .graficos import get_estoque_baixo
 
 # View de login
 @csrf_protect
@@ -175,11 +183,6 @@ def adicionar_venda(request):
         produtos = Produto.objects.all()
         return render(request, 'adicionar_venda.html', {'produtos': produtos})
 
-from .graficos import (
-    get_vendas_data, get_venda_items_data, get_produtos_data, 
-    create_fig_linha, create_fig_barras, create_fig_dispersao, 
-    create_fig_pizza, create_fig_barras_linha, get_estoque_baixo
-)
 
 def graficos(request):
     # Dados para os gráficos
@@ -218,11 +221,18 @@ def graficos(request):
 
 @login_required
 def venda_detalhe(request, venda_id):
-    venda = get_object_or_404(Venda, id=venda_id)
-    venda_items = venda.vendaitem_set.all()  
+    venda = get_object_or_404(Venda, pk=venda_id)
+    venda_items = venda.itens.all()
+
+    valor = None
+    if request.method == 'POST':
+        
+        valor = request.POST.get('valor')
+
     context = {
         'venda': venda,
         'venda_items': venda_items,
+        'valor': valor,  
     }
     return render(request, 'venda_detalhe.html', context)
 
