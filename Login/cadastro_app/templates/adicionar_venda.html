@@ -1,25 +1,40 @@
-<form method="post">
-    <h2>Adicionar Venda</h2>
-    {% csrf_token %}
-    <div id="itens">
-        <div>
-            <label for="produto">Produto:</label>
-            <select name="itens">
-                {% for produto in produtos %}
-                    <option value="{{ produto.id }}">{{ produto.nome }}</option>
-                {% endfor %}
-            </select>
-            <label for="quantidade">Quantidade:</label>
-            <input type="number" name="quantidades" min="1">
-        </div>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <ul class="menu">
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    </ul>
+    <title>Adicionar Venda</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style_adicionar_venda.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Adicionar Venda</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div id="itens">
+                <div>
+                    <label for="itens">Produto:</label>
+                    <select id="itens" name="itens">
+                        {% for produto in produtos %}
+                            <option value="{{ produto.id }}">{{ produto.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="quantidades">Quantidade:</label>
+                    <input type="number" id="quantidades" name="quantidades" min="1">
+                </div>
+            </div>
+            <button type="button" onclick="adicionarItem()">Adicionar Item</button>
+            <button type="submit">Finalizar Venda</button>
+        </form>
     </div>
-    <button type="button" onclick="adicionarItem()">Adicionar Item</button>
-    <button type="submit">Finalizar Venda</button>
-</form>
 
-<script>
-function adicionarItem() {
-    var novoItem = document.querySelector('#itens div').cloneNode(true);
-    document.getElementById('itens').appendChild(novoItem);
-}
-</script>
+    <script>
+    function adicionarItem() {
+        var novoItem = document.querySelector('#itens div').cloneNode(true);
+        document.getElementById('itens').appendChild(novoItem);
+    }
+    </script>
+</body>
+</html>
