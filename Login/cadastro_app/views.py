@@ -14,10 +14,6 @@ from .forms import GrupoForm, SubgrupoForm
 from django.http import HttpResponseForbidden
 from .models import Produto, Venda, VendaItem
 from django.db import transaction
-from django.db.models import Sum, F
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objs as go
 from django.utils import timezone
 from .forms import FeedbackForm
 from .models import Feedback
@@ -179,51 +175,35 @@ def adicionar_venda(request):
         produtos = Produto.objects.all()
         return render(request, 'adicionar_venda.html', {'produtos': produtos})
 
-@login_required
+from .graficos import (
+    get_vendas_data, get_venda_items_data, get_produtos_data, 
+    create_fig_linha, create_fig_barras, create_fig_dispersao, 
+    create_fig_pizza, create_fig_barras_linha, get_estoque_baixo
+)
+
 def graficos(request):
     # Dados para os gráficos
-    vendas = Venda.objects.filter(data_hora_venda__year=timezone.now().year)
-    produtos = Produto.objects.all()
-    venda_items = VendaItem.objects.filter(venda__data_hora_venda__year=timezone.now().year)
-
-    # DataFrames para facilitar a manipulação
-    df_vendas = pd.DataFrame(list(vendas.values('data_hora_venda', 'valor_total')))
-    df_venda_items = pd.DataFrame(list(venda_items.values('produto', 'quantidade', 'valor_total')))
-    df_produtos = pd.DataFrame(list(produtos.values('id', 'nome', 'preco_custo', 'preco_venda', 'quantidade_comprado', 'quantidade_vendido', 'grupo')))
+    vendas = get_vendas_data()
+    venda_items = get_venda_items_data()
+    produtos = get_produtos_data()
 
     # Gráfico de Linha: Custo Total e Valor Venda Total Mensal
-    df_vendas['mes'] = df_vendas['data_hora_venda'].dt.month
-    df_vendas_mensal = df_vendas.groupby('mes').agg({'valor_total': 'sum'}).reset_index()
-    fig_linha = go.Figure()
-    fig_linha.add_trace(go.Scatter(x=df_vendas_mensal['mes'], y=df_vendas_mensal['valor_total'], mode='lines+markers', name='Valor Venda Total'))
-    # Adicionar valor de custo
-    df_produtos['mes'] = df_produtos['quantidade_vendido'] * df_produtos['preco_custo']
-    fig_linha.add_trace(go.Scatter(x=df_produtos['mes'], y=df_produtos['quantidade_vendido'], mode='lines+markers', name='Valor Custo Total'))
+    fig_linha = create_fig_linha(vendas, produtos)
 
     # Gráfico de Barras: Quantidade Comprada Total e Quantidade Vendida Total Mensal
-    fig_barras = go.Figure()
-    df_produtos['mes'] = df_vendas['data_hora_venda'].dt.month
-    df_produtos_mensal = df_produtos.groupby('mes').agg({'quantidade_comprado': 'sum', 'quantidade_vendido': 'sum'}).reset_index()
-    fig_barras.add_trace(go.Bar(x=df_produtos_mensal['mes'], y=df_produtos_mensal['quantidade_comprado'], name='Quantidade Comprada'))
-    fig_barras.add_trace(go.Bar(x=df_produtos_mensal['mes'], y=df_produtos_mensal['quantidade_vendido'], name='Quantidade Vendida'))
+    fig_barras = create_fig_barras(vendas, produtos)
 
     # Gráfico de Dispersão: Percentual de Lucro dos Produtos Vendidos
-    df_venda_items['lucro'] = (df_venda_items['valor_total'] - (df_venda_items['quantidade'] * df_produtos['preco_custo'])) / df_venda_items['valor_total']
-    fig_dispersao = px.scatter(df_venda_items, x='produto', y='lucro', title='Percentual de Lucro')
+    fig_dispersao = create_fig_dispersao(venda_items, produtos)
 
     # Gráfico de Pizza: 3 Produtos Mais Vendidos em Quantidade
-    top_produtos = df_produtos.nlargest(3, 'quantidade_vendido')
-    fig_pizza = px.pie(top_produtos, values='quantidade_vendido', names='nome', title='Top 3 Produtos Mais Vendidos')
+    fig_pizza = create_fig_pizza(produtos)
 
     # Gráfico de Barras e Linha: 4 Grupos de Produtos Mais Vendidos com Meta >= 1000 Unidades
-    df_grupo = df_produtos.groupby('grupo').agg({'quantidade_vendido': 'sum'}).reset_index()
-    top_grupos = df_grupo[df_grupo['quantidade_vendido'] >= 1000].nlargest(4, 'quantidade_vendido')
-    fig_barras_linha = go.Figure()
-    fig_barras_linha.add_trace(go.Bar(x=top_grupos['grupo'], y=top_grupos['quantidade_vendido'], name='Quantidade Vendida'))
-    fig_barras_linha.add_trace(go.Scatter(x=top_grupos['grupo'], y=[1000]*len(top_grupos), mode='lines+markers', name='Meta 1000 Unidades'))
+    fig_barras_linha = create_fig_barras_linha(produtos)
 
     # Tabela Analítica: Produtos com Estoque Baixo
-    estoque_baixo = produtos.filter(quantidade_comprado__lt=50).order_by('-quantidade_comprado')  # Exemplo de limite baixo: 50
+    estoque_baixo = get_estoque_baixo()
 
     context = {
         'fig_linha': fig_linha.to_html(),
