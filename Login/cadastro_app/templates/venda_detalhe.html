@@ -12,10 +12,19 @@
         <div class="product-info">
             <h2>Itens da Venda</h2>
             <ul>
-                {% for item in venda_items %}
-                    <li>{{ item.produto.nome }}: {{ item.quantidade }} unidades</li>
+                {% for item in venda.itens.all %}
+                <li>
+                    <strong>Produto:</strong> {{ item.produto.nome }}<br>
+                    <strong>Fabricante:</strong> {{ item.produto.fabricante }}<br>
+                    <strong>Grupo:</strong> {{ item.produto.grupo }}<br>
+                    <strong>SubGrupo:</strong> {{ item.produto.subgrupo }}<br>
+                    <strong>Preço de Venda:</strong> R$ {{ item.produto.preco_venda }}<br>
+                    <strong>Quantidade:</strong> {{ item.quantidade }} unidades<br>
+                    <strong>Data e Hora da Venda:</strong> {{ venda.data_hora_venda | date:"d/m/Y H:i" }}
+                </li>
                 {% endfor %}
             </ul>
         </div>
+    </div>
 </body>
 </html>

@@ -84,7 +84,7 @@ def create_fig_barras_linha(produtos):
                                           mode='lines',
                                           name='Meta 1000 Unidades'))
 
-    fig_barras_linha.update_layout(title='Grupos de Produtos Mais Vendidos Mensalmente (Ano Corrente)',
+    fig_barras_linha.update_layout(title='Gráfico de Barras e Linha',
                                    xaxis_title='Grupo de Produto',
                                    yaxis_title='Quantidade Vendida')
 
