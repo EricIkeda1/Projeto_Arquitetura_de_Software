@@ -1,15 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <ul>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    </ul>
     <title>Adicionar Grupo</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style_adicionar_grupo.css' %}">
 </head>
 <body>
-    <h1>Adicionar Grupo</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Adicionar</button>
-    </form>
+    <div class="container">
+        <h1>Adicionar Grupo</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Adicionar</button>
+        </form>
+    </div>
 </body>
 </html>
