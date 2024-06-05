@@ -15,8 +15,6 @@ from django.http import HttpResponseForbidden
 from .models import Produto, Venda, VendaItem
 from django.db import transaction
 from django.utils import timezone
-from .forms import FeedbackForm
-from .models import Feedback
 from .models import Venda
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -236,15 +234,3 @@ def venda_detalhe(request, venda_id):
     }
     return render(request, 'venda_detalhe.html', context)
 
-def feedback_view(request):
-    if request.method == 'POST':
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('feedback_thanks')
-    else:
-        form = FeedbackForm()
-    return render(request, 'feedback_form.html', {'form': form})
-
-def feedback_thanks_view(request):
-    return render(request, 'thanks.html')

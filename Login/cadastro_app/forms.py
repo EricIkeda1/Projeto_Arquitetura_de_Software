@@ -3,8 +3,6 @@ from .models import Produto
 from .models import Fabricante
 from .models import Grupo, Subgrupo
 from django import forms
-from .models import Feedback
-
 
 class ProdutoForm(forms.ModelForm):
     class Meta:
@@ -30,8 +28,3 @@ class SubgrupoForm(forms.ModelForm):
         model = Subgrupo
         fields = ['grupo', 'nome', 'descricao']
         
-class FeedbackForm(forms.ModelForm):
-
-    class Meta:
-        model = Feedback
-        fields = ['name', 'email', 'message']
