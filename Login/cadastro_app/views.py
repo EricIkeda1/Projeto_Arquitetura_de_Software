@@ -129,6 +129,8 @@ def adicionar_grupo(request):
         form = GrupoForm()
     return render(request, 'adicionar_grupo.html', {'form': form})
 
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url='acesso_negado')
 def adicionar_subgrupo(request):
     if request.method == 'POST':
         form = SubgrupoForm(request.POST)
