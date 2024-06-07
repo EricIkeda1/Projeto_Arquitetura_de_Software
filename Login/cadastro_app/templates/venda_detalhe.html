@@ -20,15 +20,16 @@
                     <strong>SubGrupo:</strong> {{ item.produto.subgrupo }}<br>
                     <strong>Preço de Venda:</strong> R$ {{ item.produto.preco_venda }}<br>
                     <strong>Quantidade:</strong> {{ item.quantidade }} unidades<br>
+                    <strong>Valor Total do Item:</strong> R$ {{ item.valor_total }}<br>
                     <strong>Data e Hora da Venda:</strong> {{ venda.data_hora_venda | date:"d/m/Y H:i" }}
                 </li>
                 {% endfor %}
             </ul>
+            <h3>Valor Total da Venda: R$ {{ venda.valor_total }}</h3>
             <ul class="button-list">
                 <li><a href="{% url 'inicio' %}" class="btn-voltar">Voltar ao Início</a></li>
                 <li><a href="#" class="btn-imprimir" onclick="window.print()">Imprimir Recibo</a></li>
             </ul>
-            
         </div>
     </div>
 </body>

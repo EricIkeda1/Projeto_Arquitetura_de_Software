@@ -224,15 +224,8 @@ def venda_detalhe(request, venda_id):
     venda = get_object_or_404(Venda, pk=venda_id)
     venda_items = venda.itens.all()
 
-    valor = None
-    if request.method == 'POST':
-        
-        valor = request.POST.get('valor')
-
     context = {
         'venda': venda,
         'venda_items': venda_items,
-        'valor': valor,  
     }
     return render(request, 'venda_detalhe.html', context)
-
