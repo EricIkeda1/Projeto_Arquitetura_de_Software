@@ -8,6 +8,13 @@
     </ul>
     <title>Adicionar Grupo</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style_adicionar_grupo.css' %}">
+    <style>
+        .btn-listar {
+            margin-top: 0.5cm; /* Adiciona margem de 0.5 cm acima */
+            margin-left: 0; /* Remove a margem esquerda para separar verticalmente */
+            display: block; /* Faz o botão ocupar toda a largura disponível */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,6 +23,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn">Adicionar</button>
+            <button type="button" class="btn btn-listar" onclick="window.location.href='{% url 'listar_grupos' %}'">Listar Grupos</button>
         </form>
     </div>
 </body>

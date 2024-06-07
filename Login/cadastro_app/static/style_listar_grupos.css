@@ -1,52 +1,58 @@
+/* style_listar_grupos.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f7f7f7;
     margin: 0;
     padding: 0;
 }
 
-/* css para o contêiner principal */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     text-align: center;
-    color: #333;
-    padding: 20px;
-    background-color: #0073e6;
-    color: white;
-    margin: 0;
-    font-size: 2em;
+    margin-top: 20px;
+    color: #333333;
 }
 
-/* css para a lista de grupos */
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    max-width: 800px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+ul li {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;
-}
-
-/* css para cada item da lista */
-li {
     padding: 20px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
-    font-size: 1.2em;
+    margin: 10px;
+    transition: box-shadow 0.3s;
 }
 
-/* css para o último item da lista */
-li:last-child {
-    border-bottom: none;
+ul li:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-/* css de hover nos itens da lista */
-li:hover {
-    background-color: #f1f1f1;
-}
-
-/* css para o token CSRF (se aplicável) */
-input[name="csrfmiddlewaretoken"] {
-    display: none;
+@media (max-width: 600px) {
+    ul li {
+        padding: 15px;
+        margin: 8px;
+    }
 }

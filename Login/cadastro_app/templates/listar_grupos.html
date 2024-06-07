@@ -1,9 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <ul>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    </ul>
     <title>Listar Grupos</title>
-    <link rel="stylesheet" href="style_listar_grupos.css">
+    <link rel="stylesheet" href="{% static 'style_listar_grupos.css' %}">
 </head>
 <body>
     <h1>Grupos</h1>
@@ -15,4 +19,3 @@
     </ul>
 </body>
 </html>
-    
