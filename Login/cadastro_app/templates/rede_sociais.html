@@ -1,0 +1,80 @@
+        {% load static %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="{% static 'rede_sociais.css' %}">
+            <title>Minha Rede Social</title>
+        </head>
+        <body>
+            <header>
+                <div class="container">
+                    <div class="header-content">
+                        <h1>Minha Rede Social</h1>
+                        <a href="{% url 'inicio' %}" class="inicio-button">Início</a>
+                    </div>
+                </div>
+            </header>
+            <section id="sobre" class="section">
+                <div class="container">
+                    <div class="card">
+                        <h2>Sobre Mim</h2>
+                        <div class="card-content">
+                            <h3>Eric Ikeda</h3>
+                            <p>Sou um estudante de Engenharia de Software. Estou atualmente focado em aprimorar minhas habilidades em desenvolvimento web, com ênfase em tecnologias web. Estou sempre em busca de novos desafios e oportunidades de aprendizado para expandir meu conhecimento e crescer profissionalmente.</p>
+                            <p>Email: ericikeda2002@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="experiencia" class="section">
+                <div class="container">
+                    <div class="card">
+                        <h2>Habilidades</h2>
+                        <div class="card-content">
+                            <ul>
+                                <li>Desenvolvimento Web</li>
+                                <li>Programação em Python</li>
+                                <li>HTML, CSS, JavaScript</li>
+                                <li>Experiência com frameworks como Django e React</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="educacao" class="section">
+                <div class="container">
+                    <div class="card">
+                        <h2>Educação</h2>
+                        <div class="card-content">
+                            <h3>Graduação em Engenharia de Software</h3>
+                            <p>UniSenaiPR, Londrina (2021 - Presente)</p>
+                            <p>Bacharelado em Engenharia de Software.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="blog" class="section">
+                <div class="container">
+                    <h2>Redes Sociais</h2>
+                    <div class="social-buttons">
+                        <div class="github-button">
+                            <p>Repositório</p>
+                            <a href="https://github.com/EricIkeda1" target="_blank">GitHub</a>
+                        </div>
+                        <div class="linkedin-button">
+                            <p>LinkedIn</p>
+                            <a href="https://www.linkedin.com/in/ericikeda1/" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2024 Eric Y Ikeda. Todos os direitos reservados.</p>
+                </div>
+            </footer>
+        </body>
+        </html>

@@ -64,3 +64,10 @@ class VendaItem(models.Model):
 
     def __str__(self):
         return f"{self.produto.nome} - {self.quantidade}"
+    
+class RedeSocial(models.Model):
+    nome = models.CharField(max_length=100)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.nome

@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Produto
 from .models import Fabricante  
 from .models import Venda, VendaItem
+from .models import RedeSocial
 # Register your models here.
 
 admin.site.register(Produto)
@@ -14,3 +15,5 @@ class VendaAdmin(admin.ModelAdmin):
 @admin.register(VendaItem)
 class VendaItemAdmin(admin.ModelAdmin):
     list_display = ('venda', 'produto', 'quantidade', 'valor_total')
+    
+admin.site.register(RedeSocial)

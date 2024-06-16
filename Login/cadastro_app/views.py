@@ -229,3 +229,6 @@ def venda_detalhe(request, venda_id):
         'venda_items': venda_items,
     }
     return render(request, 'venda_detalhe.html', context)
+
+def rede_social(request):
+    return render(request, 'rede_sociais.html')

@@ -1,4 +1,4 @@
-/* css para o cabeçalho */
+/* CSS para o cabeçalho */
 header {
     background-color: #189290;
     color: #fff;
@@ -37,7 +37,7 @@ nav ul li a {
     font-size: 18px;
 }
 
-/* css para a seção de produtos (produtos) */
+/* CSS para a seção de produtos (produtos) */
 .produtos {
     margin-top: 30px;
 }
@@ -66,7 +66,7 @@ nav ul li a {
     color: #333;
 }
 
-/* css para o botão de remover produto (btn-remover) */
+/* CSS para o botão de remover produto (btn-remover) */
 .btn-remover {
     background-color: #dc3545;
     color: #fff;
@@ -81,7 +81,7 @@ nav ul li a {
     background-color: #c82333;
 }
 
-/* css para o botão de adicionar produto (btn) */
+/* CSS para o botão de adicionar produto (btn) */
 .btn {
     display: inline-block;
     background-color: #007bff;
@@ -99,7 +99,7 @@ nav ul li a {
     background-color: #0056b3;
 }
 
-/* css gerais */
+/* CSS gerais */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -113,3 +113,16 @@ body {
     padding: 0 20px;
 }
 
+/* CSS para o botão Início */
+.inicio-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.inicio-button:hover {
+    background-color: #0056b3;
+}
