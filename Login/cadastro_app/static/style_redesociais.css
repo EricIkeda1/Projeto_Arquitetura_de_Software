@@ -1,4 +1,4 @@
-/* rede_sociais.css */
+/* style_redesociais.css */
 
 body {
     font-family: Arial, sans-serif;
@@ -84,6 +84,7 @@ ul {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .github-button a:hover,
@@ -99,6 +100,27 @@ footer {
     margin-top: auto;
 }
 
+.inicio-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: 2px solid #007bff;
+}
+
+.inicio-button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.inicio-button:active {
+    background-color: #004080;
+    border-color: #004080;
+}
+
 @media (max-width: 768px) {
     .container {
         width: 90%;
@@ -109,30 +131,18 @@ footer {
         align-items: center;
     }
 
-    .inicio-button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    
-    .inicio-button:hover {
-        background-color: #0056b3;
-    }
-
     .social-buttons {
         flex-wrap: wrap;
     }
 
     .github-button,
-    .linkedin-button {
+    .linkedin-button,
+    .inicio-button {
         width: 100%;
         margin: 5px 0;
     }
 
-    .footer {
+    footer {
         background-color: #333;
         color: white;
         text-align: center;
@@ -140,4 +150,4 @@ footer {
         margin-top: auto;
         width: 100%;
     }
-    }
+}
