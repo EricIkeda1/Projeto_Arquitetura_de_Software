@@ -86,5 +86,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Diretórios adicionais de arquivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'cadastro_app/static'),
+]
+
 # Campo de chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
