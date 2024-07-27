@@ -1,0 +1,128 @@
+/* CSS para o cabeçalho */
+header {
+    background-color: #189290;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li:first-child {
+    margin-left: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* CSS para a seção de produtos (produtos) */
+.produtos {
+    margin-top: 30px;
+}
+
+.produtos h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.produtos ul {
+    list-style: none;
+    padding: 0;
+}
+
+.produtos li {
+    margin-bottom: 20px;
+}
+
+.produtos h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.preco {
+    font-size: 16px;
+    color: #333;
+}
+
+/* CSS para o botão de remover produto (btn-remover) */
+.btn-remover {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-remover:hover {
+    background-color: #c82333;
+}
+
+/* CSS para o botão de adicionar produto (btn) */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* CSS gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* CSS para o botão Início */
+.inicio-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.inicio-button:hover {
+    background-color: #0056b3;
+}

@@ -9,13 +9,14 @@ load_dotenv()
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Segurança
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+SECRET_KEY = 'django-insecure-=z=xb=5fmr@_(_e_v(ylo5l1pgkzx)wmk09adl69k-w-x18ge$'
+
+DEBUG = True
+
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Hosts permitidos
-ALLOWED_HOSTS = ['.vercel.app', 'login-six-red.vercel.app', '.yourdomain.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', 'projeto-arquitetura-de-software.vercel.app']
 
 # Aplicações instaladas
 INSTALLED_APPS = [
@@ -83,13 +84,14 @@ USE_I18N = True
 USE_TZ = True
 
 # Arquivos estáticos
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Diretórios adicionais de arquivos estáticos
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'cadastro_app/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Campo de chave primária padrão
