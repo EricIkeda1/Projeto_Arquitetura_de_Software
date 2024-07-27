@@ -1,0 +1,9 @@
+{
+    "builds": [
+      { "src": "cadastro/wsgi.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "cadastro/wsgi.py" }
+    ]
+  }
+  
