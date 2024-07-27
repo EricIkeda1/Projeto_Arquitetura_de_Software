@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Segurança
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Hosts permitidos
 ALLOWED_HOSTS = ['.vercel.app', 'login-six-red.vercel.app', '.yourdomain.com']
