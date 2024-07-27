@@ -2,8 +2,7 @@
   "builds": [
     {
       "src": "cadastro/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "50mb" }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -11,9 +10,5 @@
       "src": "/(.*)",
       "dest": "cadastro/wsgi.py"
     }
-  ],
-  "scripts": {
-    "build": "python manage.py collectstatic --noinput"
-  }
+  ]
 }
-
