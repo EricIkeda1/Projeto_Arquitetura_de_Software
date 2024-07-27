@@ -65,7 +65,7 @@ WSGI_APPLICATION = 'cadastro.wsgi.application'
 
 # Configuração do banco de dados
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'))
+    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
 }
 
 # Validação de senha
@@ -89,9 +89,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Diretórios adicionais de arquivos estáticos
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'cadastro_app/static'),
 ]
-
 
 # Campo de chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
