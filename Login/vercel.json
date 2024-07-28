@@ -12,10 +12,6 @@
     {
       "src": "/(.*)",
       "dest": "cadastro/wsgi.py"
-    },
-    {
-      "src": "/feedback/((?!general).*)",
-      "dest": "/api/feedback/general"
     }
   ],
   "build": {
