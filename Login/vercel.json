@@ -4,14 +4,14 @@
       "src": "cadastro/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.9",
+        "runtime": "python3.12",
         "maxLambdaSize": "15mb"
       }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/(.*)",
       "dest": "cadastro/wsgi.py"
     }
   ]
