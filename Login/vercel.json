@@ -1,13 +1,18 @@
 {
-  "builds": [{
+  "builds": [
+    {
       "src": "cadastro/wsgi.py",
       "use": "@ardnt/vercel-python-wsgi",
-      "config": { "maxLambdaSize": "15mb" }
-  }],
-  "routes": [
-      {
-          "src": "cadastro/wsgi.py",
-          "dest": "cadastro/wsgi.py"
+      "config": {
+        "runtime": "python3.12.3",
+        "maxLambdaSize": "15mb"
       }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "cadastro/wsgi.py"
+    }
   ]
 }
