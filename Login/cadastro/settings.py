@@ -22,7 +22,7 @@ DATABASES = {
 }
 
 # Hosts permitidos
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', 'projeto-arquitetura-de-software.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 # Aplicações instaladas
 INSTALLED_APPS = [
@@ -67,8 +67,8 @@ TEMPLATES = [
     },
 ]
 
-# Configuração WSGI
-WSGI_APPLICATION = 'cadastro.wsgi.application'
+# api/settings.py
+WSGI_APPLICATION = 'api.wsgi.app'
 
 # Validação de senha
 AUTH_PASSWORD_VALIDATORS = [
@@ -97,3 +97,5 @@ STATICFILES_DIRS = [
 
 # Campo de chave primária padrão
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
