@@ -10,6 +10,10 @@
       "src": "/(.*)",
       "dest": "cadastro/wsgi.py"
     }
-  ]
+  ],
+  "functions": {
+    "cadastro/wsgi.py": {
+      "runtime": "python3.9"
+    }
+  }
 }
-  
