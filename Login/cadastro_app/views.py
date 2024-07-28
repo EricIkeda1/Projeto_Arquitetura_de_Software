@@ -184,36 +184,27 @@ def adicionar_venda(request):
         return render(request, 'adicionar_venda.html', {'produtos': produtos})
 
 
+@login_required
 def graficos(request):
     # Dados para os gráficos
     vendas = get_vendas_data()
     venda_items = get_venda_items_data()
     produtos = get_produtos_data()
 
-    # Gráfico de Linha: Custo Total e Valor Venda Total Mensal
+    # Gráficos
     fig_linha = create_fig_linha(vendas, produtos)
-
-    # Gráfico de Barras: Quantidade Comprada Total e Quantidade Vendida Total Mensal
     fig_barras = create_fig_barras(vendas, produtos)
-
-    # Gráfico de Dispersão: Percentual de Lucro dos Produtos Vendidos
     fig_dispersao = create_fig_dispersao(venda_items, produtos)
-
-    # Gráfico de Pizza: 3 Produtos Mais Vendidos em Quantidade
     fig_pizza = create_fig_pizza(produtos)
-
-    # Gráfico de Barras e Linha: 4 Grupos de Produtos Mais Vendidos com Meta >= 1000 Unidades
     fig_barras_linha = create_fig_barras_linha(produtos)
-
-    # Tabela Analítica: Produtos com Estoque Baixo
     estoque_baixo = get_estoque_baixo()
 
     context = {
-        'fig_linha': fig_linha.to_html(),
-        'fig_barras': fig_barras.to_html(),
-        'fig_dispersao': fig_dispersao.to_html(),
-        'fig_pizza': fig_pizza.to_html(),
-        'fig_barras_linha': fig_barras_linha.to_html(),
+        'fig_linha': fig_linha.to_html(full_html=False),
+        'fig_barras': fig_barras.to_html(full_html=False),
+        'fig_dispersao': fig_dispersao.to_html(full_html=False),
+        'fig_pizza': fig_pizza.to_html(full_html=False),
+        'fig_barras_linha': fig_barras_linha.to_html(full_html=False),
         'estoque_baixo': estoque_baixo,
     }
 
