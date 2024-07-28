@@ -89,7 +89,7 @@ def register_view(request):
 # View de início
 @login_required    
 def inicio(request):
-    return render(request, 'inicio.html')
+    return render(request, 'Inicio.html')
 
 # Cadastro de produto
 def is_admin(user):
