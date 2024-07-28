@@ -182,32 +182,32 @@ def adicionar_venda(request):
 
 @login_required
 def graficos(request):
-    vendas = get_vendas_data()
-    venda_items = get_venda_items_data()
-    produtos = get_produtos_data()
+#    vendas = get_vendas_data()
+#    venda_items = get_venda_items_data()
+#   produtos = get_produtos_data()
 
-    labels_linha, data_linha = create_data_linha(vendas)
-    labels_barras, data_comprado, data_vendido = create_data_barras(vendas, produtos)
-    labels_dispersao, data_dispersao = create_data_dispersao(venda_items, produtos)
-    labels_pizza, data_pizza = create_data_pizza(produtos)
-    labels_barras_linha, data_barras_linha, metas = create_data_barras_linha(produtos)
+#    labels_linha, data_linha = create_data_linha(vendas)
+#    labels_barras, data_comprado, data_vendido = create_data_barras(vendas, produtos)
+#    labels_dispersao, data_dispersao = create_data_dispersao(venda_items, produtos)
+#    labels_pizza, data_pizza = create_data_pizza(produtos)
+#    labels_barras_linha, data_barras_linha, metas = create_data_barras_linha(produtos)
 
-    context = {
-        'labels_linha': labels_linha,
-        'data_linha': data_linha,
-        'labels_barras': labels_barras,
-        'data_comprado': data_comprado,
-        'data_vendido': data_vendido,
-        'labels_dispersao': labels_dispersao,
-        'data_dispersao': data_dispersao,
-        'labels_pizza': labels_pizza,
-        'data_pizza': data_pizza,
-        'labels_barras_linha': labels_barras_linha,
-        'data_barras_linha': data_barras_linha,
-        'metas': metas,
-    }
+#    context = {
+#        'labels_linha': labels_linha,
+#        'data_linha': data_linha,
+#        'labels_barras': labels_barras,
+#        'data_comprado': data_comprado,
+#        'data_vendido': data_vendido,
+#        'labels_dispersao': labels_dispersao,
+#        'data_dispersao': data_dispersao,
+#        'labels_pizza': labels_pizza,
+#        'data_pizza': data_pizza,
+#        'labels_barras_linha': labels_barras_linha,
+#        'data_barras_linha': data_barras_linha,
+#        'metas': metas,
+#    }
 
-    return render(request, 'graficos.html', context)
+    return render(request, 'graficos.html')#, context)
 
 @login_required
 def venda_detalhe(request, venda_id):

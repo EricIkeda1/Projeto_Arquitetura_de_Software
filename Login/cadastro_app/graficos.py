@@ -1,8 +1,8 @@
 # graficos.py
 from django.utils import timezone
 from .models import Venda, Produto, VendaItem
-import pandas as pd
-from django.db.models import Sum
+#import pandas as pd
+#from django.db.models import Sum
 
 def get_vendas_data():
     return Venda.objects.filter(data_hora_venda__year=timezone.now().year)
