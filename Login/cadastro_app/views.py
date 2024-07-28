@@ -28,9 +28,9 @@ def login_view(request):
                 login(request, user_auth)
                 return redirect('inicio')
         
-        return render(request, 'cadastro_app/login.html', {'error_message': 'Email ou senha inválidos'})
+        return render(request, 'cadastro_app/Login.html', {'error_message': 'Email ou senha inválidos'})
     
-    return render(request, 'cadastro_app/login.html')
+    return render(request, 'cadastro_app/Login.html')
 
 # View de gráficos
 @login_required
