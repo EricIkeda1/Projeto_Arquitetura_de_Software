@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=z=xb=5fmr@_(_e_v(ylo5l1pgkzx)wmk09adl69k-w-x18ge$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -119,9 +119,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Diretório onde você coloca seus arquivos estáticos durante o desenvolvimento
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'cadastro_app', 'static')]
 
+# Diretório onde os arquivos estáticos coletados serão armazenados
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
