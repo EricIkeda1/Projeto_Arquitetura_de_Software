@@ -22,7 +22,7 @@ DATABASES = {
 }
 
 # Hosts permitidos
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app']
 
 # Aplicações instaladas
 INSTALLED_APPS = [
