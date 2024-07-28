@@ -7,13 +7,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Caminho base do projeto
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-=z=xb=5fmr@_(_e_v(ylo5l1pgkzx)wmk09adl69k-w-x18ge$'
 
 DEBUG = True
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+# Configuração do banco de dados para SQLite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Hosts permitidos
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', 'projeto-arquitetura-de-software.vercel.app']
@@ -64,11 +70,6 @@ TEMPLATES = [
 # Configuração WSGI
 WSGI_APPLICATION = 'cadastro.wsgi.application'
 
-# Configuração do banco de dados
-DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-}
-
 # Validação de senha
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -84,8 +85,8 @@ USE_I18N = True
 USE_TZ = True
 
 # Arquivos estáticos
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Diretórios adicionais de arquivos estáticos
