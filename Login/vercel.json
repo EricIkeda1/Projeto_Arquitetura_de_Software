@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "build_files.sh",
+      "src": "cadastro/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.12"
@@ -12,6 +12,10 @@
     {
       "src": "/(.*)",
       "dest": "cadastro/wsgi.py"
+    },
+    {
+      "src": "/feedback/((?!general).*)",
+      "dest": "/api/feedback/general"
     }
   ],
   "build": {
