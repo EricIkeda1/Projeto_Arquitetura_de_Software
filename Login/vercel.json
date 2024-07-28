@@ -4,7 +4,7 @@
       "src": "cadastro/wsgi.py",
       "use": "@ardnt/vercel-python-wsgi",
       "config": {
-        "runtime": "python3.9",
+        "runtime": "python3.6",
         "maxLambdaSize": "15mb"
       }
     }
