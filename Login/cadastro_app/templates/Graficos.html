@@ -5,8 +5,19 @@
     <meta charset="UTF-8">
     <title>Gráficos de Vendas</title>
     {% csrf_token %}
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'styles_graficos_vendas.css' %}">
+    <style>
+        .indisponivel {
+            text-align: center;
+            font-size: 24px;
+            color: red;
+            margin-top: 20px;
+        }
+        .grafico {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <ul>
@@ -15,11 +26,33 @@
     <h1>Gráficos de Vendas</h1>
     
     <div class="dashboard">
-        <div class="grafico" id="linha">{{ fig_linha|safe }}</div>
-        <div class="grafico" id="barras">{{ fig_barras|safe }}</div>
-        <div class="grafico" id="dispersao">{{ fig_dispersao|safe }}</div>
-        <div class="grafico" id="pizza">{{ fig_pizza|safe }}</div>
-        <div class="grafico" id="barras_linha">{{ fig_barras_linha|safe }}</div>
+        <!-- Mensagem de Funcionalidade Indisponível -->
+        <div class="indisponivel">
+            Funcionalidade indisponível por tempo indeterminado 
+        </div>
+
+        <!-- Gráficos (ocultos por padrão) -->
+        <div class="grafico">
+            <canvas id="linhaChart"></canvas>
+        </div>
+        
+        <div class="grafico">
+            <canvas id="barrasChart"></canvas>
+        </div>
+        
+        <div class="grafico">
+            <canvas id="dispersaoChart"></canvas>
+        </div>
+        
+        <div class="grafico">
+            <canvas id="pizzaChart"></canvas>
+        </div>
+        
+        <div class="grafico">
+            <canvas id="barrasLinhaChart"></canvas>
+        </div>
+        
+        <!-- Produtos com Estoque Baixo -->
         <div class="grafico card" id="estoque_baixo">
             <h2>Produtos com Estoque Baixo</h2>
             <table class="tabela">
@@ -46,4 +79,86 @@
             </table>
         </div>
     </div>
-    
+
+    <script>
+        // Comentado por enquanto, pois a funcionalidade está indisponível
+        /*
+        // Gráfico de Linha
+        new Chart(document.getElementById('linhaChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: {{ labels_linha|safe }},
+                datasets: [{
+                    label: 'Valor Total',
+                    data: {{ data_linha|safe }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                }]
+            }
+        });
+
+        // Gráfico de Barras
+        new Chart(document.getElementById('barrasChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: {{ labels_barras|safe }},
+                datasets: [{
+                    label: 'Quantidade Comprada',
+                    data: {{ data_comprado|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                }, {
+                    label: 'Quantidade Vendida',
+                    data: {{ data_vendido|safe }},
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                }]
+            }
+        });
+
+        // Gráfico de Dispersão
+        new Chart(document.getElementById('dispersaoChart').getContext('2d'), {
+            type: 'scatter',
+            data: {
+                labels: {{ labels_dispersao|safe }},
+                datasets: [{
+                    label: 'Percentual de Lucro',
+                    data: {{ data_dispersao|safe }},
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                }]
+            }
+        });
+
+        // Gráfico de Pizza
+        new Chart(document.getElementById('pizzaChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: {{ labels_pizza|safe }},
+                datasets: [{
+                    label: 'Quantidade Vendida',
+                    data: {{ data_pizza|safe }},
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                }]
+            }
+        });
+
+        // Gráfico de Barras e Linha
+        new Chart(document.getElementById('barrasLinhaChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: {{ labels_barras_linha|safe }},
+                datasets: [{
+                    label: 'Quantidade Vendida',
+                    data: {{ data_barras_linha|safe }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                }, {
+                    label: 'Meta',
+                    data: {{ metas|safe }},
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    type: 'line',
+                }]
+            }
+        });
+        */
+    </script>
+</body>
+</html>

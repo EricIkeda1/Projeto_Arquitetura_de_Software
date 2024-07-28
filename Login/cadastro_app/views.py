@@ -18,11 +18,7 @@ from django.utils import timezone
 from .models import Venda
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-import plotly.graph_objects as go
-import plotly.express as px
-from django.db.models import Sum
-from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_fig_linha, create_fig_barras, create_fig_dispersao, create_fig_pizza, create_fig_barras_linha
-from .graficos import get_estoque_baixo
+from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_data_linha, create_data_barras, create_data_dispersao, create_data_pizza, create_data_barras_linha
 
 # View de login
 @csrf_protect
@@ -186,26 +182,29 @@ def adicionar_venda(request):
 
 @login_required
 def graficos(request):
-    # Dados para os gráficos
     vendas = get_vendas_data()
     venda_items = get_venda_items_data()
     produtos = get_produtos_data()
 
-    # Gráficos
-    fig_linha = create_fig_linha(vendas, produtos)
-    fig_barras = create_fig_barras(vendas, produtos)
-    fig_dispersao = create_fig_dispersao(venda_items, produtos)
-    fig_pizza = create_fig_pizza(produtos)
-    fig_barras_linha = create_fig_barras_linha(produtos)
-    estoque_baixo = get_estoque_baixo()
+    labels_linha, data_linha = create_data_linha(vendas)
+    labels_barras, data_comprado, data_vendido = create_data_barras(vendas, produtos)
+    labels_dispersao, data_dispersao = create_data_dispersao(venda_items, produtos)
+    labels_pizza, data_pizza = create_data_pizza(produtos)
+    labels_barras_linha, data_barras_linha, metas = create_data_barras_linha(produtos)
 
     context = {
-        'fig_linha': fig_linha.to_html(full_html=False),
-        'fig_barras': fig_barras.to_html(full_html=False),
-        'fig_dispersao': fig_dispersao.to_html(full_html=False),
-        'fig_pizza': fig_pizza.to_html(full_html=False),
-        'fig_barras_linha': fig_barras_linha.to_html(full_html=False),
-        'estoque_baixo': estoque_baixo,
+        'labels_linha': labels_linha,
+        'data_linha': data_linha,
+        'labels_barras': labels_barras,
+        'data_comprado': data_comprado,
+        'data_vendido': data_vendido,
+        'labels_dispersao': labels_dispersao,
+        'data_dispersao': data_dispersao,
+        'labels_pizza': labels_pizza,
+        'data_pizza': data_pizza,
+        'labels_barras_linha': labels_barras_linha,
+        'data_barras_linha': data_barras_linha,
+        'metas': metas,
     }
 
     return render(request, 'graficos.html', context)
