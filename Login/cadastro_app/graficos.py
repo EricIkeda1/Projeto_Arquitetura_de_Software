@@ -1,7 +1,6 @@
 from django.utils import timezone
 from .models import Venda, Produto, VendaItem
 import plotly.graph_objects as go
-import plotly.express as px
 import pandas as pd
 from django.db.models import Sum 
 
@@ -44,7 +43,9 @@ def create_fig_dispersao(venda_items, produtos):
     df_produtos = pd.DataFrame(list(produtos.values('id', 'preco_custo')))
 
     df_venda_items['lucro'] = (df_venda_items['valor_total'] - (df_venda_items['quantidade'] * df_produtos['preco_custo'])) / df_venda_items['valor_total']
-    fig_dispersao = px.scatter(df_venda_items, x='produto', y='lucro', title='Gráfico de Dispersão', labels={'produto': 'Produto', 'lucro': 'Percentual de Lucro'})
+    fig_dispersao = go.Figure()
+    fig_dispersao.add_trace(go.Scatter(x=df_venda_items['produto'], y=df_venda_items['lucro'], mode='markers', name='Percentual de Lucro'))
+    fig_dispersao.update_layout(title='Gráfico de Dispersão', xaxis_title='Produto', yaxis_title='Percentual de Lucro')
     
     return fig_dispersao
 
@@ -52,7 +53,8 @@ def create_fig_pizza(produtos):
     df_produtos = pd.DataFrame(list(produtos.values('nome', 'quantidade_vendido')))
     top_produtos = df_produtos.nlargest(3, 'quantidade_vendido')
     
-    fig_pizza = px.pie(top_produtos, values='quantidade_vendido', names='nome', title='Gráfico de Pizza', labels={'nome': 'Produto', 'quantidade_vendido': 'Quantidade Vendida'})
+    fig_pizza = go.Figure()
+    fig_pizza.add_trace(go.Pie(labels=top_produtos['nome'], values=top_produtos['quantidade_vendido'], title='Gráfico de Pizza'))
     return fig_pizza
 
 def create_fig_barras_linha(produtos):
