@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "cadastro/wsgi.py",
@@ -15,5 +16,6 @@
     "cadastro/wsgi.py": {
       "runtime": "python3.9"
     }
-  }
+  },
+  "rootDirectory": "Projeto_Arquitetura_de_Software"
 }
