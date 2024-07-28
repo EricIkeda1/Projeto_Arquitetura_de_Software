@@ -37,7 +37,7 @@ def login_view(request):
                 login(request, user_auth)
                 return redirect('inicio')
         
-        return HttpResponse('Email ou senha inválidos')
+        return render('Email ou senha inválidos')
 
 # View de gráficos
 @login_required
@@ -150,7 +150,7 @@ def remover_produto(request, produto_id):
         produto.delete()
         return redirect('listar_produtos')
     else:
-        return HttpResponseForbidden("Acesso negado")
+        return render("Acesso negado")
 
 def remover_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
