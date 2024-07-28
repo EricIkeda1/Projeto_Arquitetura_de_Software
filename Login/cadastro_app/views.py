@@ -4,19 +4,32 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.decorators import user_passes_test
-from .forms import ProdutoForm, FabricanteForm, GrupoForm, SubgrupoForm
-from .models import Produto, Grupo, Subgrupo, Venda, VendaItem
+from django.contrib.auth.decorators import user_passes_test, login_required
+from .forms import ProdutoForm
+from .models import Produto
+from .forms import FabricanteForm
+from django.contrib.admin.views.decorators import staff_member_required
+from .models import Grupo, Subgrupo
+from .forms import GrupoForm, SubgrupoForm
+from django.http import HttpResponseForbidden
+from .models import Produto, Venda, VendaItem
 from django.db import transaction
 from django.utils import timezone
+from .models import Venda
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-#from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_data_linha, create_data_barras, create_data_dispersao, create_data_pizza, create_data_barras_linha
+#import plotly.graph_objects as go
+#import plotly.express as px
+#from django.db.models import Sum
+#from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_fig_linha, create_fig_barras, create_fig_dispersao, create_fig_pizza, create_fig_barras_linha
+#from .graficos import get_estoque_baixo
 
 # View de login
 @csrf_protect
 def login_view(request):
-    if request.method == "POST":
+    if request.method == "GET":
+        return render(request, 'Login.html')
+    else:
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         
@@ -26,41 +39,14 @@ def login_view(request):
             user_auth = authenticate(request, username=user.username, password=senha)
             if user_auth is not None:
                 login(request, user_auth)
-                return redirect('inicio')
+                return redirect('Inicio')
         
-        return render(request, 'Login.html', {'error_message': 'Email ou senha inválidos'})
-    
-    return render(request, 'Login.html')
+        return HttpResponse('Email ou senha inválidos')
 
 # View de gráficos
 @login_required
 def graficos(request):
-    # vendas = get_vendas_data()
-    # venda_items = get_venda_items_data()
-    # produtos = get_produtos_data()
-
-    # labels_linha, data_linha = create_data_linha(vendas)
-    # labels_barras, data_comprado, data_vendido = create_data_barras(vendas, produtos)
-    # labels_dispersao, data_dispersao = create_data_dispersao(venda_items, produtos)
-    # labels_pizza, data_pizza = create_data_pizza(produtos)
-    # labels_barras_linha, data_barras_linha, metas = create_data_barras_linha(produtos)
-
-    # context = {
-    #     'labels_linha': labels_linha,
-    #     'data_linha': data_linha,
-    #     'labels_barras': labels_barras,
-    #     'data_comprado': data_comprado,
-    #     'data_vendido': data_vendido,
-    #     'labels_dispersao': labels_dispersao,
-    #     'data_dispersao': data_dispersao,
-    #     'labels_pizza': labels_pizza,
-    #     'data_pizza': data_pizza,
-    #     'labels_barras_linha': labels_barras_linha,
-    #     'data_barras_linha': data_barras_linha,
-    #     'metas': metas,
-    # }
-
-    return render(request, 'graficos.html')  # , context)
+    return render(request, 'Graficos.html')
 
 # View de registro
 @csrf_protect
@@ -83,15 +69,15 @@ def register_view(request):
         user.save()
         success_message = 'Usuário cadastrado com sucesso'
         return render(request, 'Cadastro.html', {'success_message': success_message})
-    
-    return render(request, 'Cadastro.html')
+    else:
+        return render(request, 'Cadastro.html')
 
 # View de início
 @login_required    
 def inicio(request):
     return render(request, 'Inicio.html')
 
-# Cadastro de produto
+#Cadastro de produto
 def is_admin(user):
     return user.is_staff
 
@@ -155,6 +141,10 @@ def adicionar_subgrupo(request):
         form = SubgrupoForm()
     return render(request, 'adicionar_subgrupo.html', {'form': form})
 
+def listar_produtos(request):
+    produtos = Produto.objects.all()
+    return render(request, 'listar_produtos.html', {'produtos': produtos})
+
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url='acesso_negado')
 def remover_produto(request, produto_id):
@@ -163,8 +153,15 @@ def remover_produto(request, produto_id):
     if request.method == 'POST':
         produto.delete()
         return redirect('listar_produtos')
-    
-    return render(request, 'acesso_negado.html')
+    else:
+        return HttpResponseForbidden("Acesso negado")
+
+def remover_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    if request.method == "POST":
+        produto.delete()
+        return redirect('listar_produtos') 
+    return redirect('listar_produtos')  
 
 def adicionar_venda(request):
     if request.method == 'POST':
@@ -185,6 +182,42 @@ def adicionar_venda(request):
     else:
         produtos = Produto.objects.all()
         return render(request, 'adicionar_venda.html', {'produtos': produtos})
+
+
+def graficos(request):
+#    # Dados para os gráficos
+#    vendas = get_vendas_data()
+#    venda_items = get_venda_items_data()
+#    produtos = get_produtos_data()
+
+    # Gráfico de Linha: Custo Total e Valor Venda Total Mensal
+#    fig_linha = create_fig_linha(vendas, produtos)
+
+    # Gráfico de Barras: Quantidade Comprada Total e Quantidade Vendida Total Mensal
+#    fig_barras = create_fig_barras(vendas, produtos)
+
+    # Gráfico de Dispersão: Percentual de Lucro dos Produtos Vendidos
+#   fig_dispersao = create_fig_dispersao(venda_items, produtos)
+
+    # Gráfico de Pizza: 3 Produtos Mais Vendidos em Quantidade
+#    fig_pizza = create_fig_pizza(produtos)
+
+    # Gráfico de Barras e Linha: 4 Grupos de Produtos Mais Vendidos com Meta >= 1000 Unidades
+#    fig_barras_linha = create_fig_barras_linha(produtos)
+
+    # Tabela Analítica: Produtos com Estoque Baixo
+#    estoque_baixo = get_estoque_baixo()
+
+#    context = {
+#        'fig_linha': fig_linha.to_html(),
+#        'fig_barras': fig_barras.to_html(),
+#        'fig_dispersao': fig_dispersao.to_html(),
+#        'fig_pizza': fig_pizza.to_html(),
+#        'fig_barras_linha': fig_barras_linha.to_html(),
+#       'estoque_baixo': estoque_baixo,
+#    }
+
+    return render(request, 'graficos.html',) #context)
 
 @login_required
 def venda_detalhe(request, venda_id):
