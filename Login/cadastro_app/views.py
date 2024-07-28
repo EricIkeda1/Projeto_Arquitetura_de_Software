@@ -11,7 +11,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_data_linha, create_data_barras, create_data_dispersao, create_data_pizza, create_data_barras_linha
+#from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_data_linha, create_data_barras, create_data_dispersao, create_data_pizza, create_data_barras_linha
 
 # View de login
 @csrf_protect
@@ -28,9 +28,9 @@ def login_view(request):
                 login(request, user_auth)
                 return redirect('inicio')
         
-        return render(request, 'login.html', {'error_message': 'Email ou senha inválidos'})
+        return render(request, 'cadastro_app/login.html', {'error_message': 'Email ou senha inválidos'})
     
-    return render(request, 'login.html')
+    return render(request, 'cadastro_app/login.html')
 
 # View de gráficos
 @login_required
@@ -60,7 +60,7 @@ def graficos(request):
     #     'metas': metas,
     # }
 
-    return render(request, 'graficos.html')  # , context)
+    return render(request, 'cadastro_app/graficos.html')  # , context)
 
 # View de registro
 @csrf_protect
@@ -72,24 +72,24 @@ def register_view(request):
 
         if not username or not email or not senha:
             error_message = 'Todos os campos são obrigatórios'
-            return render(request, 'Cadastro.html', {'error_message': error_message})
+            return render(request, 'cadastro_app/Cadastro.html', {'error_message': error_message})
 
         user_exists = User.objects.filter(email=email).exists()
         if user_exists:
             error_message = 'Já existe um usuário com este email'
-            return render(request, 'Cadastro.html', {'error_message': error_message})
+            return render(request, 'cadastro_app/Cadastro.html', {'error_message': error_message})
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
         success_message = 'Usuário cadastrado com sucesso'
-        return render(request, 'Cadastro.html', {'success_message': success_message})
+        return render(request, 'cadastro_app/Cadastro.html', {'success_message': success_message})
     
-    return render(request, 'Cadastro.html')
+    return render(request, 'cadastro_app/Cadastro.html')
 
 # View de início
 @login_required    
 def inicio(request):
-    return render(request, 'inicio.html')
+    return render(request, 'cadastro_app/inicio.html')
 
 # Cadastro de produto
 def is_admin(user):
@@ -102,20 +102,20 @@ def adicionar_produto(request):
         form = ProdutoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('listar_produtos')
+            return redirect('cadastro_app/listar_produtos')
     else:
         form = ProdutoForm()
-    return render(request, 'adicionar_produto.html', {'form': form})
+    return render(request, 'cadastro_app/adicionar_produto.html', {'form': form})
 
 def listar_produtos(request):
     produtos = Produto.objects.all()
-    return render(request, 'listar_produtos.html', {'produtos': produtos})
+    return render(request, 'cadastro_app/listar_produtos.html', {'produtos': produtos})
 
 def acesso_negado(request):
-    return render(request, 'acesso_negado.html')
+    return render(request, 'cadastro_app/acesso_negado.html')
 
 @login_required(login_url='login')
-@user_passes_test(is_admin, login_url='acesso_negado')
+@user_passes_test(is_admin, login_url='cadastro_app/acesso_negado')
 def cadastrar_fabricante(request):
     if request.method == 'POST':
         form = FabricanteForm(request.POST)
@@ -124,14 +124,14 @@ def cadastrar_fabricante(request):
             return redirect('pagina_sucesso')
     else:
         form = FabricanteForm()
-    return render(request, 'cadastro_fabricante.html', {'form': form})
+    return render(request, 'cadastro_app/cadastro_fabricante.html', {'form': form})
 
 def pagina_sucesso(request):
-    return render(request, 'pagina_sucesso.html')
+    return render(request, 'cadastro_app/pagina_sucesso.html')
 
 def listar_grupos(request):
     grupos = Grupo.objects.all()
-    return render(request, 'listar_grupos.html', {'grupos': grupos})
+    return render(request, 'cadastro_app/listar_grupos.html', {'grupos': grupos})
 
 def adicionar_grupo(request):
     if request.method == 'POST':
@@ -141,7 +141,7 @@ def adicionar_grupo(request):
             return redirect('listar_grupos')
     else:
         form = GrupoForm()
-    return render(request, 'adicionar_grupo.html', {'form': form})
+    return render(request, 'cadastro_app/adicionar_grupo.html', {'form': form})
 
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url='acesso_negado')
@@ -153,7 +153,7 @@ def adicionar_subgrupo(request):
             return redirect('listar_grupos')
     else:
         form = SubgrupoForm()
-    return render(request, 'adicionar_subgrupo.html', {'form': form})
+    return render(request, 'cadastro_app/adicionar_subgrupo.html', {'form': form})
 
 @login_required(login_url='login')
 @user_passes_test(is_admin, login_url='acesso_negado')
@@ -164,7 +164,7 @@ def remover_produto(request, produto_id):
         produto.delete()
         return redirect('listar_produtos')
     
-    return render(request, 'acesso_negado.html')
+    return render(request, 'cadastro_app/acesso_negado.html')
 
 def adicionar_venda(request):
     if request.method == 'POST':
@@ -184,7 +184,7 @@ def adicionar_venda(request):
         return redirect('venda_detalhe', venda_id=venda.id)
     else:
         produtos = Produto.objects.all()
-        return render(request, 'adicionar_venda.html', {'produtos': produtos})
+        return render(request, 'cadastro_app/adicionar_venda.html', {'produtos': produtos})
 
 @login_required
 def venda_detalhe(request, venda_id):
@@ -195,7 +195,7 @@ def venda_detalhe(request, venda_id):
         'venda': venda,
         'venda_items': venda_items,
     }
-    return render(request, 'venda_detalhe.html', context)
+    return render(request, 'cadastro_app/venda_detalhe.html', context)
 
 def rede_social(request):
-    return render(request, 'rede_sociais.html')
+    return render(request, 'cadastro_app/rede_sociais.html')
