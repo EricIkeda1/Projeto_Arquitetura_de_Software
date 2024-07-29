@@ -1,22 +1,27 @@
 {
+    "version": 2,
     "builds": [
-        {
-            "src": "cadastro/wsgi.py",
-            "use": "@vercel/python",
-            "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.3" }
+      {
+        "src": "cadastro/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.3" }
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "staticfiles_build"
         }
+      }
     ],
     "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "cadastro/wsgi.py"
-        }
-    ],
-    "installCommand": "pip install -r requirements.txt",
-    "buildCommand": "python manage.py collectstatic --noinput && python manage.py migrate",
-    "devCommand": "python manage.py runserver"
-}
+      {
+        "src": "cadastro_app/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "cadastro/wsgi.py"
+      }
+    ]
+  }
