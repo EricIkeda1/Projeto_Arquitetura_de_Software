@@ -1,2 +1,4 @@
-pip install -r requirements.txt 
-python3.12.3 manage.py collectstatic
+#!/bin/sh
+pip install -r requirements.txt
+python3 manage.py collectstatic --noinput
+python3 manage.py migrate
