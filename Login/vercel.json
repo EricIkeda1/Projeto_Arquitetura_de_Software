@@ -4,7 +4,10 @@
       {
         "src": "cadastro/wsgi.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.12.3" }
+        "config": {
+          "maxLambdaSize": "15mb",
+          "runtime": "python3.12.3"
+        }
       },
       {
         "src": "build_files.sh",
@@ -16,7 +19,7 @@
     ],
     "routes": [
       {
-        "src": "cadastro_app/static/(.*)",
+        "src": "/static/(.*)",
         "dest": "/static/$1"
       },
       {
@@ -25,3 +28,4 @@
       }
     ]
   }
+  
