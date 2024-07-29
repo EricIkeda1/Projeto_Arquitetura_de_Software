@@ -1,0 +1,5 @@
+{
+    "scripts": {
+      "build": "[Django] build --output public"
+    }
+  }
