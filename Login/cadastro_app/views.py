@@ -18,17 +18,17 @@ from django.utils import timezone
 from .models import Venda
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-#import plotly.graph_objects as go
-#import plotly.express as px
-#from django.db.models import Sum
-#from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_fig_linha, create_fig_barras, create_fig_dispersao, create_fig_pizza, create_fig_barras_linha
-#from .graficos import get_estoque_baixo
+import plotly.graph_objects as go
+import plotly.express as px
+from django.db.models import Sum
+from .graficos import get_vendas_data, get_venda_items_data, get_produtos_data, create_fig_linha, create_fig_barras, create_fig_dispersao, create_fig_pizza, create_fig_barras_linha
+from .graficos import get_estoque_baixo
 
 # View de login
 @csrf_protect
 def login_view(request):
     if request.method == "GET":
-        return render(request, 'Login.html')
+        return render(request, 'login.html')
     else:
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -39,14 +39,14 @@ def login_view(request):
             user_auth = authenticate(request, username=user.username, password=senha)
             if user_auth is not None:
                 login(request, user_auth)
-                return redirect('Inicio')
+                return redirect('inicio')
         
         return HttpResponse('Email ou senha inválidos')
 
 # View de gráficos
 @login_required
 def graficos(request):
-    return render(request, 'Graficos.html')
+    return render(request, 'graficos.html')
 
 # View de registro
 @csrf_protect
@@ -75,7 +75,7 @@ def register_view(request):
 # View de início
 @login_required    
 def inicio(request):
-    return render(request, 'Inicio.html')
+    return render(request, 'inicio.html')
 
 #Cadastro de produto
 def is_admin(user):
@@ -185,39 +185,39 @@ def adicionar_venda(request):
 
 
 def graficos(request):
-#    # Dados para os gráficos
-#    vendas = get_vendas_data()
-#    venda_items = get_venda_items_data()
-#    produtos = get_produtos_data()
+    # Dados para os gráficos
+    vendas = get_vendas_data()
+    venda_items = get_venda_items_data()
+    produtos = get_produtos_data()
 
     # Gráfico de Linha: Custo Total e Valor Venda Total Mensal
-#    fig_linha = create_fig_linha(vendas, produtos)
+    fig_linha = create_fig_linha(vendas, produtos)
 
     # Gráfico de Barras: Quantidade Comprada Total e Quantidade Vendida Total Mensal
-#    fig_barras = create_fig_barras(vendas, produtos)
+    fig_barras = create_fig_barras(vendas, produtos)
 
     # Gráfico de Dispersão: Percentual de Lucro dos Produtos Vendidos
-#   fig_dispersao = create_fig_dispersao(venda_items, produtos)
+    fig_dispersao = create_fig_dispersao(venda_items, produtos)
 
     # Gráfico de Pizza: 3 Produtos Mais Vendidos em Quantidade
-#    fig_pizza = create_fig_pizza(produtos)
+    fig_pizza = create_fig_pizza(produtos)
 
     # Gráfico de Barras e Linha: 4 Grupos de Produtos Mais Vendidos com Meta >= 1000 Unidades
-#    fig_barras_linha = create_fig_barras_linha(produtos)
+    fig_barras_linha = create_fig_barras_linha(produtos)
 
     # Tabela Analítica: Produtos com Estoque Baixo
-#    estoque_baixo = get_estoque_baixo()
+    estoque_baixo = get_estoque_baixo()
 
-#    context = {
-#        'fig_linha': fig_linha.to_html(),
-#        'fig_barras': fig_barras.to_html(),
-#        'fig_dispersao': fig_dispersao.to_html(),
-#        'fig_pizza': fig_pizza.to_html(),
-#        'fig_barras_linha': fig_barras_linha.to_html(),
-#       'estoque_baixo': estoque_baixo,
-#    }
+    context = {
+        'fig_linha': fig_linha.to_html(),
+        'fig_barras': fig_barras.to_html(),
+        'fig_dispersao': fig_dispersao.to_html(),
+        'fig_pizza': fig_pizza.to_html(),
+        'fig_barras_linha': fig_barras_linha.to_html(),
+        'estoque_baixo': estoque_baixo,
+    }
 
-    return render(request, 'graficos.html',) #context)
+    return render(request, 'graficos.html', context)
 
 @login_required
 def venda_detalhe(request, venda_id):
