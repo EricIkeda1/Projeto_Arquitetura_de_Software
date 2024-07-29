@@ -118,11 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Diretório onde você coloca seus arquivos estáticos durante o desenvolvimento
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'cadastro_app', 'static')]
-
-# Diretório onde os arquivos estáticos coletados serão armazenados
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
